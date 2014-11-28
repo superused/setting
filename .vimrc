@@ -3,8 +3,9 @@ filetype off
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
+  " call neobundle#rc(expand('~/.vim/bundle'))
 endif
+call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'Align'
@@ -17,12 +18,14 @@ NeoBundle 'erikw/tmux-powerline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
 "NeoBundle 'tyru/restart.vim'
+"NeoBundle 'Lokaltog/powerline'
 " NeoBundle 'osyo-manga/vim-precious'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'sgur/vim-textobj-parameter'
 NeoBundle 'osyo-manga/vim-textobj-multiblock'
 NeoBundle 'osyo-manga/vim-textobj-multitextobj'
 NeoBundle 'Shougo/context_filetype.vim'
+NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'delphinus35/dotfiles'
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 " NeoBundle 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見やすくする
@@ -37,14 +40,17 @@ NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括�
 NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'scrooloose/syntastic' "syntaxチェック
 NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
+" NeoBundle 'alpaca-tc/alpaca_powertabline'
+" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+" NeoBundle 'Lokaltog/powerline-fontpatcher'
 
 "bundle color
 " NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'vim-scripts/twilight'
 " NeoBundle 'jonathanfilip/vim-lucius'
 " NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 " NeoBundle 'vim-scripts/rdark'
@@ -73,6 +79,8 @@ NeoBundle 'wolf-dog/lightline-nighted.vim'
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
+
+call neobundle#end()
 
 "<C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
 " set splitbelow "新しいウインドウを下に開く
@@ -129,8 +137,11 @@ let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの�
 ""tag" 未設定＆未使用＆未翻訳。
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype plugin on
-filetype indent on
+filetype plugin indent on
+
+" If there area uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 set bg=dark
 hi clear
@@ -227,6 +238,7 @@ set nostartofline
 set ruler "カーソルが何行目の何列目か表示
 set visualbell
 set notimeout ttimeout ttimeoutlen=200
+set pastetoggle=<F11>
 
 "set syntax=htmldjango
 map Y y$
@@ -253,7 +265,7 @@ set pastetoggle=<F11>
 
 set foldmethod=marker
 
-" colorscheme zenburn
+"colorscheme zenburn
 " colorscheme hybrid
 " colorscheme mrkn256
 " colorscheme jellybeans
@@ -262,7 +274,7 @@ set foldmethod=marker
 " colorscheme iceberg
 colorscheme molokai
 autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=4
+autocmd vimenter * highlight visual ctermbg=237
 autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme rdark
 " colorscheme wombat
@@ -289,39 +301,34 @@ autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme nighted
 
 " Setting Of Lightline.vim
-" Setting Of Lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'nighted',
+      \ 'colorscheme': 'wombat',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
-      \   'right': [ [ 'lineinfo', 'syntastic' ], [ 'percent' ], [ 'charcode', 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component': {
-      \   'lineinfo': ' %3l:%-2v',
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ]
       \ },
       \ 'component_function': {
       \   'modified': 'MyModified',
       \   'readonly': 'MyReadonly',
       \   'fugitive': 'MyFugitive',
+      \   'gitgutter': 'MyGitGutter',
       \   'filename': 'MyFilename',
       \   'fileformat': 'MyFileformat',
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \   'charcode': 'MyCharCode',
-      \   'gitgutter': 'MyGitGutter',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ }
+
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '' : ''
+  " return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '.' : ''
+  return &readonly ? '' : ''
 endfunction
 
 function! MyFilename()
@@ -453,4 +460,3 @@ let g:restart_sessionoptions
 "   let g:session_autoload = 'no' 
 " endif 
 " unlet s:local_session_directory
-
