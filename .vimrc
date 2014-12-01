@@ -1,6 +1,9 @@
 set nocompatible
 filetype off
 
+" init command
+"$ mkdir -p ~/.vim/bundle
+"$ git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   " call neobundle#rc(expand('~/.vim/bundle'))
