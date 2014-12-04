@@ -310,6 +310,9 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ]
       \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
+      \ },
       \ 'component_function': {
       \   'modified': 'MyModified',
       \   'readonly': 'MyReadonly',
