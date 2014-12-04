@@ -171,7 +171,7 @@ set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
-set listchars=eol:¬,tab:▸\
+set listchars=eol:↲,tab:▸\
 " カーソル移動関連の設定
 
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
@@ -449,20 +449,20 @@ let g:indent_guides_enable_on_vim_startup = 1
 " restart.vim終了時に保存するセッションオプションを設定する
 let g:restart_sessionoptions
   \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
-" " 現在のディレクトリ直下の .vimsessions/ を取得 
-" let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions') 
-" " 存在すれば 
-" if isdirectory(s:local_session_directory) 
-"   " session保存ディレクトリをそのディレクトリの設定 
-"   let g:session_directory = s:local_session_directory 
+" " 現在のディレクトリ直下の .vimsessions/ を取得
+" let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+" " 存在すれば
+" if isdirectory(s:local_session_directory)
+"   " session保存ディレクトリをそのディレクトリの設定
+"   let g:session_directory = s:local_session_directory
 "   " vimを辞める時に自動保存
 "   let g:session_autosave = 'yes'
-"    " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く 
-"   let g:session_autoload = 'yes' 
+"    " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+"   let g:session_autoload = 'yes'
 "   " 1分間に1回自動保存
-"   let g:session_autosave_periodic = 1 
-" else 
-"   let g:session_autosave = 'no' 
-"   let g:session_autoload = 'no' 
-" endif 
+"   let g:session_autosave_periodic = 1
+" else
+"   let g:session_autosave = 'no'
+"   let g:session_autoload = 'no'
+" endif
 " unlet s:local_session_directory
