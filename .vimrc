@@ -164,7 +164,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 set ambiwidth=double
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
-"set cursorcolumn   " カーソル位置のカラムの背景色を変える
+" set nocursorline     " カーソル行の強調表示をしない
+" set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=1    " メッセージ表示欄を1行確保
 set showmatch      " 対応する括弧を強調表示
@@ -262,6 +263,31 @@ nnoremap ]q :cnext<CR>
 nnoremap [Q <C-u>cfirst<CR>
 nnoremap ]Q <C-u>clast<CR>
 
+" タブの移動
+function! s:MoveTabpage(num)
+  if type(a:num) != type(0)
+    return
+  endif
+
+  let pos = tabpagenr() - 1 + a:num
+  let tabcount = tabpagenr("$")
+
+  if pos < 0
+    let pos = tabcount - 1
+  elseif pos >= tabcount 
+    let pos = 0
+  endif
+
+  execute "tabmove " . pos
+endfunction
+
+" TabMove: Move tabpage with reltive number
+command! -nargs=1 TabMove :call <SID>MoveTabpage(<f-args>)
+
+nnoremap <silent><C-k> :call <SID>MoveTabpage(1)<Return><CR>
+nnoremap <silent><C-j> :call <SID>MoveTabpage(-1)<Return><CR>
+
+
 "F11でインサートモードの切り替えを行う
 imap <F11> <nop>
 set pastetoggle=<F11>
@@ -277,7 +303,7 @@ set foldmethod=marker
 " colorscheme iceberg
 colorscheme molokai
 autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=237
+autocmd vimenter * highlight visual ctermbg=5
 autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme rdark
 " colorscheme wombat
@@ -305,13 +331,11 @@ autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'solarized',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ]
-      \ },
-      \ 'component': {
-      \   'lineinfo': ' %3l:%-2v',
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'charcode', 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
       \   'modified': 'MyModified',
@@ -328,6 +352,9 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' },
       \ }
 
+      " \ 'component': {
+      " \   'lineinfo': ' %3l:%-2v',
+      " \ },
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
