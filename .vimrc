@@ -318,7 +318,7 @@ set foldmethod=marker
 " colorscheme iceberg
 colorscheme molokai
 autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=5
+autocmd vimenter * highlight visual ctermbg=20
 autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme rdark
 " colorscheme wombat
