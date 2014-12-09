@@ -263,6 +263,21 @@ nnoremap ]q :cnext<CR>
 nnoremap [Q <C-u>cfirst<CR>
 nnoremap ]Q <C-u>clast<CR>
 
+" ショートカット
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+nnoremap S <C-w><
+nnoremap D <C-w>>
+nnoremap X <C-w>+
+nnoremap C <C-w>-
+
 " タブの移動
 function! s:MoveTabpage(num)
   if type(a:num) != type(0)
