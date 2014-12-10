@@ -155,10 +155,11 @@ endif
 let colors_name = "darkblue"
 
 set encoding=utf8 "エンコード
+set fenc=utf-8 "エンコード
 scriptencoding utf8
 set ambiwidth=double
 set fileformat=unix
-set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+" set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set fileformats=unix,dos,mac
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set ambiwidth=double
@@ -274,7 +275,7 @@ nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap sH <C-w>H
 nnoremap S <C-w><
-nnoremap D <C-w>>
+nnoremap F <C-w>>
 nnoremap X <C-w>+
 nnoremap C <C-w>-
 
@@ -481,7 +482,7 @@ if has('mac')
   set termencoding=utf-8
   set encoding=utf-8
   set fileencoding=utf-8
-  set fileencodings=utf-8,cp932
+  " set fileencodings=utf-8,cp932
 endif
 "テスト
 
