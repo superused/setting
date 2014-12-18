@@ -46,6 +46,7 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 " NeoBundle 'alpaca-tc/alpaca_powertabline'
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " NeoBundle 'Lokaltog/powerline-fontpatcher'
+NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
 
 "bundle color
 " NeoBundle 'nanotech/jellybeans.vim'
@@ -174,6 +175,8 @@ set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
 set listchars=eol:↲,tab:▸\
+" set listchars=tab:▸\
+" set listchars=tab:>\ ,trail:_
 " カーソル移動関連の設定
 
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
