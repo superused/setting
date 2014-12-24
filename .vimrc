@@ -141,6 +141,7 @@ let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの�
 ""tag" 未設定＆未使用＆未翻訳。
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set nocp
 filetype plugin indent on
 
 " If there area uninstalled bundles found on startup,
@@ -350,7 +351,7 @@ autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'nighted',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
