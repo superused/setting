@@ -247,7 +247,6 @@ set nostartofline
 set ruler "カーソルが何行目の何列目か表示
 set visualbell
 set notimeout ttimeout ttimeoutlen=200
-set pastetoggle=<F11>
 
 "set syntax=htmldjango
 map Y y$
@@ -280,8 +279,8 @@ nnoremap sL <C-w>L
 nnoremap sH <C-w>H
 nnoremap S <C-w><
 nnoremap F <C-w>>
-nnoremap X <C-w>+
-nnoremap C <C-w>-
+nnoremap C <C-w>+
+nnoremap X <C-w>-
 
 " タブの移動
 function! s:MoveTabpage(num)
@@ -308,9 +307,9 @@ nnoremap <silent><C-k> :call <SID>MoveTabpage(1)<Return><CR>
 nnoremap <silent><C-j> :call <SID>MoveTabpage(-1)<Return><CR>
 
 
-"F11でインサートモードの切り替えを行う
-imap <F11> <nop>
-set pastetoggle=<F11>
+"F4でインサートモードの切り替えを行う
+imap <F4> <nop>
+set pastetoggle=<F4>
 
 set foldmethod=marker
 
@@ -513,3 +512,23 @@ let g:restart_sessionoptions
 "   let g:session_autoload = 'no'
 " endif
 " unlet s:local_session_directory
+
+" yank to remote
+" let g:y2r_config = {
+"             \   'tmp_file': '/tmp/exchange_file',
+"             \   'key_file': expand('$HOME') . '/.exchange.key',
+"             \   'host': 'localhost',
+"             \   'port': 52224,
+"             \}
+" function Yank2Remote()
+"   echo 'test'
+"     call writefile(split(@", '\n'), g:y2r_config.tmp_file, 'b')
+"     let s:params = ['cat %s %s | nc -w1 %s %s']
+"     for s:item in ['key_file', 'tmp_file', 'host', 'port']
+"         let s:params += [shellescape(g:y2r_config[s:item])]
+"     endfor
+"     let s:ret = system(call(function('printf'), s:params))
+" endfunction
+" " nnoremap <silent> <unique> <Leader>y :call Yank2Remote()<CR>
+" nnoremap <silent><unique><C-y> :call Yank2Remote()<CR>
+
