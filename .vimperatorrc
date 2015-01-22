@@ -4,50 +4,58 @@ source! /Users/shimojy/.vimperatorrc.local
 
 " vim: set ft=vimperator:
 
-"============================
-" General
-"============================
+" ブラウザタイトルをFirefoxにする
+set titlestring=Firefox
 
-" $BF~NOMs$K<+F0%U%)!<%+%9$7$J$$(B
+" 入力欄に自動フォーカスしない
 set focuscontent
-" $B%S%8%e%"%k%Y%k$rI=<($7$J$$(B
+" ビジュアルベルを表示しない
 set visualbell
 highlight Bell display:none
-" :o$B$J$I$G$NJd408uJd$r%5!<%A%(%s%8%s!"MzNr$K8BDj(B
+" :oなどでの補完候補をサーチエンジン、履歴に限定
 set complete=sl
-" Hint$B%b!<%I$G%"%k%U%!%Y%C%H;HMQ(B
+" Hintモードでアルファベット使用
 set hintchars=jfnvurhgytbkdmcielsxoe
-" $B%D!<%k%P!<$O%"%I%*%s$H%?%V$N$_I=<((B
+" ツールバーはアドオンとタブのみ表示
 set gui=addons,nobookmarks,nomenu,nonavigation,tas
-" command$B%b!<%I$G(BIME$B%*%U(B
+" commandモードでIMEオフ
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+" 検索で大文字小文字を無視
+set ignorecase
+" 自動入力欄フォーカスを無効化
+set focuscontent
+" 最小化した時にメモリを開放
+set! config.trim_on_minimize=true
+"
 
-" $B0\F0I}(B
+" 移動幅
 noremap j 5j
 noremap k 5k
 
-" $B%?%V0\F0(B
+" タブ移動
 nnoremap h <C-p>
 nnoremap l <C-n>
 
-" $B%?%V$N0LCVJQ99(B
+" タブの位置変更
 map <C-l> :tabmove! +1<CR>
 map <C-h> :tabmove! -1<CR>
+" Backspaceに戻るを割り当てる
+map <BS> <A-Left>
 
-" undo$B0lMw$+$i3+$/(B
+" undo一覧から開く
 nnoremap U :undo<Space>
 let g:hint_tombloo_key = 'r'
 
-" $B%V%i%&%6:F5/F0(B
+" ブラウザ再起動
 nnoremap <C-r> :restart<CR>
 
-"============================
-" colorscheme
-"============================
-" $B%G%U%)%k%H$N%R%s%HGI<j$9$.!d!c(B
+" デフォルトのヒント派手すぎ＞＜
 hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
 hi HintElem color: gray; background-color: #a1e4e6;
 hi HintActive color: black; background-color: #ff8700;
 
-" $B%G%U%)%k%H$N%(%i!<@V$/$F$3$o$$!d!c(B
+" デフォルトのエラー赤くてこわい＞＜
 hi ErrorMsg color:white; background-color: #ec6aa1;
+
+" 読み込んだ事を出力
+echo .vimperatorrc sourced
