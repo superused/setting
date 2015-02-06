@@ -171,6 +171,7 @@ set cursorline     " カーソル行の背景色を変える
 " set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=1    " メッセージ表示欄を1行確保
+set tw=0           " 自動改行しない(twは自動改行させる文字数。0だと自動改行しない)
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
@@ -187,7 +188,7 @@ set sidescrolloff=16           " 左右スクロール時の視界を確保
 set sidescroll=1               " 左右スクロールは一文字づつ行う
 
 " ファイル処理関連の設定
-set nowrap
+set nowrap     " 画面の端で行を折り返さない
 set confirm    " 保存されていないファイルがあるときは終了前に保存確認
 set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
 set autoread   "外部でファイルに変更がされた場合は読みなおす
