@@ -50,19 +50,21 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
 
 "bundle color
-" NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'jnurmine/Zenburn'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'fugalh/desert.vim'
 " NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'vim-scripts/twilight'
 " NeoBundle 'jonathanfilip/vim-lucius'
 " NeoBundle 'jpo/vim-railscasts-theme'
-" NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'vim-scripts/Wombat'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 " NeoBundle 'vim-scripts/rdark'
 " NeoBundle 'croaker/mustang-vim'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'ciaranm/inkpot'
-" NeoBundle 'sjl/badwolf'
+NeoBundle 'sjl/badwolf'
 " NeoBundle 'sickill/vim-monokai'
 " NeoBundle 'djjcast/mirodark'
 " NeoBundle '29decibel/codeschool-vim-theme'
@@ -73,7 +75,7 @@ NeoBundle 'tomasr/molokai'
 " NeoBundle 'vim-scripts/phd'
 " NeoBundle 'vim-scripts/darktango.vim'
 " NeoBundle 'vim-scripts/BusyBee'
-" NeoBundle 'cocopon/Iceberg.vim'
+NeoBundle 'cocopon/Iceberg.vim'
 " NeoBundle 'wolf-dog/nighted.vim'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 
@@ -314,17 +316,13 @@ set pastetoggle=<F4>
 
 set foldmethod=marker
 
-"colorscheme zenburn
+" colorscheme zenburn
 " colorscheme hybrid
 " colorscheme mrkn256
 " colorscheme jellybeans
 " colorscheme railscasts
 " colorscheme solarized
 " colorscheme iceberg
-colorscheme molokai
-autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=88
-autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme rdark
 " colorscheme wombat
 " colorscheme lucius
@@ -348,6 +346,10 @@ autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " colorscheme darktango
 " colorscheme BusyBee
 " colorscheme nighted
+colorscheme molokai
+autocmd vimenter * highlight Comment ctermfg=247
+autocmd vimenter * highlight visual ctermbg=88
+autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
