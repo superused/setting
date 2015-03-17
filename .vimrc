@@ -36,6 +36,7 @@ NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
+NeoBundle 'Shougo/vimfiler'
 " NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 " NeoBundle 'xolox/vim-session', {
 "         \ 'depends' : 'xolox/vim-misc',
@@ -167,6 +168,10 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 set ambiwidth=double
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
+" カレント行にアンダーラインを引く
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+highlight CursorLine gui=underline ctermfg=NONE ctermbg=NONE
+
 " set nocursorline     " カーソル行の強調表示をしない
 " set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
@@ -301,14 +306,14 @@ function! s:MoveTabpage(num)
   execute "tabmove " . pos
 endfunction
 
-" TabMove: Move tabpage with reltive number
+" タブ移動：タブページの番号をC-k,C-jで移動させる
 command! -nargs=1 TabMove :call <SID>MoveTabpage(<f-args>)
 
 nnoremap <silent><C-k> :call <SID>MoveTabpage(1)<Return><CR>
 nnoremap <silent><C-j> :call <SID>MoveTabpage(-1)<Return><CR>
 
 
-"F4でインサートモードの切り替えを行う
+" F4でインサートモードの切り替えを行う
 imap <F4> <nop>
 set pastetoggle=<F4>
 
