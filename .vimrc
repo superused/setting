@@ -314,6 +314,7 @@ command! -nargs=1 TabMove :call <SID>MoveTabpage(<f-args>)
 nnoremap <silent><C-k> :call <SID>MoveTabpage(1)<Return><CR>
 nnoremap <silent><C-j> :call <SID>MoveTabpage(-1)<Return><CR>
 
+inoremap <silent> jj <ESC>
 
 " F4でインサートモードの切り替えを行う
 imap <F4> <nop>
