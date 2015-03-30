@@ -32,7 +32,6 @@ NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'delphinus35/dotfiles'
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
-" NeoBundle 'nathanaelkane/vim-indent-guides' " インデントに色を付けて見やすくする
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
@@ -139,6 +138,15 @@ let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの�
 "NERDTreeStatusline NERDtreeウィンドウにステータスラインを表示。
 "Values: Any valid statusline setting.
 "Default: %{b:NERDTreeRoot.path.strForOS(0)}
+
+
+autocmd FileType gitv call s:my_gitv_settings()
+function! s:my_gitv_settings()
+  "ここに設定を書く
+  " s:my_gitv_setting 内
+  setlocal iskeyword+=/,-,.
+  nnoremap <silent><buffer> C :<C-u>Git checkout <C-r><C-w><CR>
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""tag" その他オプション
