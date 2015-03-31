@@ -21,7 +21,6 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'erikw/tmux-powerline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
-"NeoBundle 'tyru/restart.vim'
 "NeoBundle 'Lokaltog/powerline'
 " NeoBundle 'osyo-manga/vim-precious'
 NeoBundle 'kana/vim-textobj-user'
@@ -48,6 +47,7 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
+" NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 
 "bundle color
 NeoBundle 'jnurmine/Zenburn'
@@ -142,10 +142,25 @@ let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの�
 
 autocmd FileType gitv call s:my_gitv_settings()
 function! s:my_gitv_settings()
-  "ここに設定を書く
   " s:my_gitv_setting 内
   setlocal iskeyword+=/,-,.
   nnoremap <silent><buffer> C :<C-u>Git checkout <C-r><C-w><CR>
+  nnoremap <buffer> <Space>rb :<C-u>Git rebase <C-r>=GitvGetCurrentHash()<CR><Space>
+  nnoremap <buffer> <Space>R :<C-u>Git revert <C-r>=GitvGetCurrentHash()<CR><CR>
+  nnoremap <buffer> <Space>h :<C-u>Git cherry-pick <C-r>=GitvGetCurrentHash()<CR><CR>
+  nnoremap <buffer> <Space>rh :<C-u>Git reset --hard <C-r>=GitvGetCurrentHash()<CR>
+  noremap <silent><buffer> t :<C-u>windo call <SID>toggle_git_folding()<CR>1<C-w>w
+endfunction
+
+function! s:gitv_get_current_hash()
+  return matchstr(getline('.'), '\[\zs.\{7\}\ze\]$')
+endfunction
+
+autocmd FileType git setlocal nofoldenable foldlevel=0
+function! s:toggle_git_folding()
+  if &filetype ==# 'git'
+    setlocal foldenable!
+  endif
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
