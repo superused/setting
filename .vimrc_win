@@ -13,75 +13,17 @@ call neobundle#begin(expand('../../vim74-kaoriya-win64/bundle'))
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'Align'
 NeoBundle 'itchyny/lightline.vim'
-" NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'gregsexton/gitv'
-" NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
-" NeoBundle 'erikw/tmux-powerline'
-" NeoBundle 'kana/vim-operator-user'
-" NeoBundle 'kana/vim-operator-replace'
-"NeoBundle 'Lokaltog/powerline'
-" NeoBundle 'osyo-manga/vim-precious'
-" NeoBundle 'kana/vim-textobj-user'
-" NeoBundle 'sgur/vim-textobj-parameter'
-" NeoBundle 'osyo-manga/vim-textobj-multiblock'
-" NeoBundle 'osyo-manga/vim-textobj-multitextobj'
 NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
-" NeoBundle 'delphinus35/dotfiles'
-" NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
-" NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
-" NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
-" NeoBundle 'Shougo/vimfiler'
-" NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
-" NeoBundle 'xolox/vim-session', {
-"         \ 'depends' : 'xolox/vim-misc',
-"         \ }
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
-" NeoBundle 'mattn/emmet-vim' "HTML書く
-" NeoBundle 'scrooloose/syntastic' "syntaxチェック
-" NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
-" NeoBundle 'alpaca-tc/alpaca_powertabline'
-" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
-" NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
-" NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 
 "bundle color
-" NeoBundle 'jnurmine/Zenburn'
 " NeoBundle 'nanotech/jellybeans.vim'
-" NeoBundle 'fugalh/desert.vim'
-" NeoBundle 'w0ng/vim-hybrid'
-" NeoBundle 'vim-scripts/twilight'
-" NeoBundle 'jonathanfilip/vim-lucius'
-" NeoBundle 'jpo/vim-railscasts-theme'
-" NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
-" NeoBundle 'vim-scripts/rdark'
-" NeoBundle 'croaker/mustang-vim'
-" NeoBundle 'mrkn/mrkn256.vim'
-" NeoBundle 'ciaranm/inkpot'
-" NeoBundle 'sjl/badwolf'
-" NeoBundle 'sickill/vim-monokai'
-" NeoBundle 'djjcast/mirodark'
-" NeoBundle '29decibel/codeschool-vim-theme'
-" NeoBundle 'morhetz/gruvbox'
-" NeoBundle 'cocopon/colorswatch.vim'
-" NeoBundle 'skammer/vim-css-color'
-" NeoBundle 'chriskempson/vim-tomorrow-theme'
-" NeoBundle 'vim-scripts/phd'
-" NeoBundle 'vim-scripts/darktango.vim'
-" NeoBundle 'vim-scripts/BusyBee'
-" NeoBundle 'cocopon/Iceberg.vim'
-" NeoBundle 'wolf-dog/nighted.vim'
-NeoBundle 'wolf-dog/lightline-nighted.vim'
-
-" NeoBundle 'alpaca-tc/alpaca_powertabline'
-" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
 
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
