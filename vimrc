@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 03-Apr-2015.
+" Last Change: 09-Apr-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -249,10 +249,11 @@ filetype off
 "$ mkdir -p ~/.vim/bundle
 "$ git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 if has('vim_starting')
-  set runtimepath+=../../vim74-kaoriya-win64/bundle/neobundle.vim
+  " set runtimepath+=../../vim74-kaoriya-win64/bundle/neobundle.vim
+  set runtimepath+=C:/vim74-kaoriya-win64/bundle/neobundle.vim
   " call neobundle#rc(expand('../../vim74-kaoriya-win64/bundle'))
 endif
-call neobundle#begin(expand('../../vim74-kaoriya-win64/bundle'))
+call neobundle#begin(expand('C:/vim74-kaoriya-win64/bundle'))
 
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'Align'
@@ -264,9 +265,10 @@ NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
+NeoBundle 'tomtom/tcomment_vim' "コメントを楽に行う
 
 "bundle color
-" NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'tomasr/molokai'
 
 "colorscheme view bundle
@@ -300,7 +302,7 @@ cmap <silent> <C-e> <C-u>:NERDTreeTabsToggle<CR>
 "引数なしでvimを開いたらNERDTreeを起動、
 "引数ありならNERDTreeは起動しない、引数で渡されたファイルを開く。
 "How can I open a NERDTree automatically when vim starts up if no files were specified?
-"autocmd vimenter * if !argc() | NERDTreeTabs | endif
+" autocmd vimenter * if !argc() | NERDTreeTabs | endif
 
 "他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 "How can I close vim if the only window left open is a NERDTree?
@@ -315,11 +317,15 @@ let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$'] "NERDTreeIgnore 無
 "let g:NERDTreeIgnore=['\.vim$', '\~$']
 "let g:NERDTreeIgnore=[]
 let g:NERDTreeShowHidden=1 "1 : 隠しファイルを表示する。
-let g:NERDTreeWinSize=30 "NERDTreeのツリーの幅
+let g:NERDTreeWinSize=20 "NERDTreeのツリーの幅
 let g:NERDTreeMinimalUI=1 "ブックマークや、ヘルプのショートカットをメニューに表示する。
 let g:NERDTreeDirArrows=0 "NERDTreeを+|`などを使ってツリー表示をする。 1 : +|`などを使わない
 let g:NERDTreeMouseMode=2 "マウス操作方法 1 : ファイル、ディレクトリ両方共ダブルクリックで開く。 2 : ディレクトリのみシングルクリックで開く。3 : ファイル、ディレクトリ両方共シングルクリックで開く。
+let g:NERDTreeShowBookmarks=1 " ブックマークを最初から表示
 let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの設置場所を指定。 0 : 行番号を表示しない。
+
+" 起動時にはNERDTreeを表示しない
+autocmd vimenter * NERDTree|normal gg3j
 
 "NERDTreeStatusline NERDtreeウィンドウにステータスラインを表示。
 "Values: Any valid statusline setting.
@@ -471,7 +477,7 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 noremap ; :
 
-"autocmd vimenter * NERDTreeTabsOpen
+" autocmd vimenter * NERDTreeTabsOpen
 
 augroup filetypedetect
     au BufRead,BufNewFile *.twig set filetype=htmldjango
@@ -749,3 +755,35 @@ let g:restart_sessionoptions
 " nnoremap <silent><unique><C-y> :call Yank2Remote()<CR>
 
 nnoremap <silent> <C-^> <Nop>
+set grepprg=grep\ -nH
+
+
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=b
+
+" NeoBundle 'xolox/vim-session', {
+"             \ 'depends' : 'xolox/vim-misc',
+"           \ }
+"
+" " 現在のディレクトリ直下の .vimsessions/ を取得 
+" let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+" " 存在すれば
+" if isdirectory(s:local_session_directory)
+"   " session保存ディレクトリをそのディレクトリの設定
+"   let g:session_directory = s:local_session_directory
+"   " vimを辞める時に自動保存
+"   let g:session_autosave = 'yes'
+"   " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+"   let g:session_autoload = 'yes'
+"   " 1分間に1回自動保存
+"   let g:session_autosave_periodic = 1
+" else
+"   let g:session_autosave = 'no'
+"   let g:session_autoload = 'no'
+" endif
+" unlet s:local_session_directory
