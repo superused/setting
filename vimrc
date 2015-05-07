@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 09-Apr-2015.
+" Last Change: 07-May-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -234,11 +234,6 @@ if kaoriya#switch#enabled('disable-vimdoc-ja')
   let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimdoc-ja"'), ',')
 endif
 
-" vimproc: 同梱のvimprocを無効化する
-if kaoriya#switch#enabled('disable-vimproc')
-  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
-endif
-
 " Copyright (C) 2009-2013 KaoriYa/MURAOKA Taro
 
 
@@ -255,25 +250,32 @@ if has('vim_starting')
 endif
 call neobundle#begin(expand('C:/vim74-kaoriya-win64/bundle'))
 
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'Align'
+" NeoBundle 'h1mesuke/unite-outline'
+" NeoBundle 'Align'
 NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'gregsexton/gitv'
+" NeoBundle 'gregsexton/gitv'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
-NeoBundle 'Shougo/context_filetype.vim'
-NeoBundle 'Lokaltog/powerline-fontpatcher'
+" NeoBundle 'Shougo/context_filetype.vim'
+" NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
-NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
+" NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'tomtom/tcomment_vim' "コメントを楽に行う
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 
 "bundle color
 NeoBundle 'nanotech/jellybeans.vim'
-" NeoBundle 'tomasr/molokai'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'altercation/vim-colors-solarized'
 
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
+" NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
 
 call neobundle#end()
 
@@ -283,6 +285,35 @@ call neobundle#end()
 
 "<C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
+
+" neocomplete用設定
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " insertモードから戻るのが遅いので対策
 if !has('gui_running')
@@ -496,6 +527,7 @@ nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
+nnoremap sx <C-w>x
 nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
@@ -504,6 +536,8 @@ nnoremap S <C-w><
 nnoremap F <C-w>>
 nnoremap C <C-w>+
 nnoremap X <C-w>-
+nnoremap sT :Unite tab<CR>
+nnoremap sB :Unite buffer<CR>
 
 " タブの移動
 function! s:MoveTabpage(num)
@@ -567,7 +601,7 @@ set foldmethod=marker
 " colorscheme darktango
 " colorscheme BusyBee
 " colorscheme nighted
-"colorscheme molokai
+" colorscheme molokai
 autocmd vimenter * highlight Comment ctermfg=247
 autocmd vimenter * highlight visual ctermbg=88
 autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
@@ -787,3 +821,5 @@ set guioptions-=b
 "   let g:session_autoload = 'no'
 " endif
 " unlet s:local_session_directory
+
+set showtabline=2 
