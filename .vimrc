@@ -19,8 +19,8 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'erikw/tmux-powerline'
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'kana/vim-operator-replace'
+" NeoBundle 'kana/vim-operator-user'
+" NeoBundle 'kana/vim-operator-replace'
 "NeoBundle 'Lokaltog/powerline'
 " NeoBundle 'osyo-manga/vim-precious'
 NeoBundle 'kana/vim-textobj-user'
@@ -29,7 +29,7 @@ NeoBundle 'osyo-manga/vim-textobj-multiblock'
 NeoBundle 'osyo-manga/vim-textobj-multitextobj'
 NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'delphinus35/dotfiles'
+" NeoBundle 'delphinus35/dotfiles'
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
@@ -39,6 +39,7 @@ NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 " NeoBundle 'xolox/vim-session', {
 "         \ 'depends' : 'xolox/vim-misc',
 "         \ }
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'scrooloose/syntastic' "syntaxチェック
@@ -46,7 +47,7 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 " NeoBundle 'alpaca-tc/alpaca_powertabline'
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
+" NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 
 "bundle color
@@ -95,6 +96,35 @@ call neobundle#end()
 
 "<C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
+
+" neocomplete用設定
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " insertモードから戻るのが遅いので対策
 if !has('gui_running')
@@ -206,7 +236,7 @@ set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
-set listchars=eol:↲,tab:▸\
+" set listchars=eol:↲,tab:▸\
 " set listchars=tab:▸\
 " set listchars=tab:>\ ,trail:_
 " カーソル移動関連の設定
@@ -398,10 +428,11 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
       \ }
+      \ }
+
+      " \ 'separator': { 'left': '', 'right': '' },
+      " \ 'subseparator': { 'left': '', 'right': '' },
 
       " \ 'component': {
       " \   'lineinfo': ' %3l:%-2v',
