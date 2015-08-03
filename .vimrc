@@ -15,6 +15,7 @@ NeoBundle 'Align'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'gregsexton/gitv'
+NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
@@ -412,7 +413,6 @@ autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'nighted',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
@@ -430,6 +430,8 @@ let g:lightline = {
       \   'mode': 'MyMode',
       \ }
       \ }
+
+      " \ 'colorscheme': 'nighted',
 
       " \ 'separator': { 'left': '', 'right': '' },
       " \ 'subseparator': { 'left': '', 'right': '' },
