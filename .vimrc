@@ -41,6 +41,8 @@ NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 "         \ 'depends' : 'xolox/vim-misc',
 "         \ }
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'violetyk/neocomplete-php.vim'
+let g:neocomplete_php_locale = 'ja'
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'scrooloose/syntastic' "syntaxチェック
@@ -88,8 +90,13 @@ NeoBundle 'wolf-dog/lightline-nighted.vim'
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
+NeoBundle 'thinca/vim-ref'
+" NeoBundle 'alvan/vim-php-manual'
 
 call neobundle#end()
+
+" ESCでIMEを確実にOFF
+inoremap <ESC> <ESC>:set iminsert=0<CR>
 
 "<C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
 " set splitbelow "新しいウインドウを下に開く
@@ -98,19 +105,65 @@ call neobundle#end()
 "<C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
 
-" neocomplete用設定
+" " neocomplete用設定
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_ignore_case = 1
+" let g:neocomplete#enable_smart_case = 1
+" if !exists('g:neocomplete#keyword_patterns')
+"   let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns._ = '\h\w*'
+"
+" " Plugin key-mappings.
+" inoremap <expr><C-g>     neocomplete#undo_completion()
+" inoremap <expr><C-l>     neocomplete#complete_common_string()
+"
+" " Recommended key-mappings.
+" " <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return neocomplete#close_popup() . "\<CR>"
+"   " For no inserting <CR> key.
+"   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" endfunction
+" " <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" " <C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+"""""""
+
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_ignore_case = 1
+" Use smartcase.
 let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+ 
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \ }
+ 
+" Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
   let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns._ = '\h\w*'
-
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+ 
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
-
+ 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -126,6 +179,37 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+ 
+" For cursor moving in insert mode(Not recommended)
+"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+" Or set this.
+"let g:neocomplete#enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplete#enable_insert_char_pre = 1
+ 
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+ 
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+ 
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+""""""
 
 " insertモードから戻るのが遅いので対策
 if !has('gui_running')
@@ -597,3 +681,160 @@ let g:restart_sessionoptions
 " endfunction
 " " nnoremap <silent> <unique> <Leader>y :call Yank2Remote()<CR>
 " nnoremap <silent><unique><C-y> :call Yank2Remote()<CR>
+
+" PHP環境
+let php_sql_query = 1
+let php_baselib = 1
+let php_htmlInStrings = 1
+let php_noShortTags = 1
+let php_parent_error_close = 1
+
+" mysqlの場合
+let g:sql_type_default='mysql'
+
+augroup VCSCommand
+  autocmd!
+  autocmd User VCSBufferCreated call s:vcscommand_buffer_settings()
+augroup END
+
+function! s:vcscommand_buffer_settings() "{{{3
+  if !exists('b:VCSCommandCommand') | return | endif
+  if b:VCSCommandCommand !=# 'commitlog' | setlocal readonly     | endif
+  if b:VCSCommandCommand !=# 'vimdiff'   | setlocal nofoldenable | endif
+  if &filetype ==# 'gitlog'              | setlocal syntax=git   | endif
+  nmap <unique> <buffer> <silent> q :bwipeout<CR>
+  if &filetype =~# '^\(svnlog\|gitlog\|hglog\)$'
+    nnoremap <silent> <buffer> <CR> :<C-u>call <SID>vcscommand_filetype('log', 'VCSDiff')<CR>gg
+    nnoremap <silent> <buffer> v    :<C-u>call <SID>vcscommand_filetype('log', 'VCSVimDiff')<CR>gg
+    nnoremap <silent> <buffer> r    :<C-u>call <SID>vcscommand_filetype('log', 'VCSReview')<CR>gg
+    nnoremap <silent> <buffer> i    :<C-u>call <SID>vcscommand_filetype('log', 'VCSInfo')<CR>gg
+  elseif b:VCSCommandCommand =~# '.*annotate'
+    nnoremap <silent> <buffer> <CR> :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSDiff')<CR>gg
+    nnoremap <silent> <buffer> v    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSVimDiff')<CR>gg
+    nnoremap <silent> <buffer> r    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSReview')<CR>gg
+    nnoremap <silent> <buffer> l    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSLog')<CR>gg
+    nnoremap <silent> <buffer> i    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSInfo')<CR>gg
+  endif
+endfunction "}}}
+
+function! s:vcscommand_exec(command, option) "{{{3
+  if a:command =~# '^\(VCSDiff\|VCSLog\)$'
+    let g:VCSCommandSplit = winnr('$') == 1 ? 'vertical' : 'horizontal'
+  endif
+  execute a:command a:option
+  unlet! g:VCSCommandSplit
+endfunction "}}}
+
+function! s:vcscommand_log(...) "{{{3
+  let option = join(a:000)
+  if exists('b:VCSCommandVCSType')
+    if exists('b:VCSCommandCommand')
+      if b:VCSCommandCommand ==# 'log'
+        echo "Sorry, you cannot open vcslog on vcslog buffer"
+        unlet option
+      elseif b:VCSCommandCommand =~# 'diff\|review'
+        if !exists('b:VCSCommandStatusText')
+          echo "Sorry, you are on a working buffer"
+          unlet option
+        else
+          " Shows only the target revision/commit
+          if b:VCSCommandVCSType ==# 'SVN'
+            let matched = matchlist(b:VCSCommandStatusText, '(\d\+ : \(\d\+\))')
+            if len(matched) | let option = matched[1] | endif
+          elseif b:VCSCommandVCSType ==# 'git'
+            let matched = matchlist(b:VCSCommandStatusText, '\S\+ \(\w\+\)')
+            if len(matched) | let option = '-n 1 ' . matched[1] | endif
+          elseif b:VCSCommandVCSType ==# 'HG'
+            let matched = matchlist(b:VCSCommandStatusText, '(\(\d\+\) : \w\+)')
+            if len(matched) | let option = matched[1] | endif
+          endif
+        endif
+      endif
+    elseif v:count
+      if b:VCSCommandVCSType ==# 'SVN'
+        let limit_option = '-l'
+      elseif b:VCSCommandVCSType ==# 'git'
+        let limit_option = '-n'
+      elseif b:VCSCommandVCSType ==# 'HG'
+        let limit_option = '-l'
+      endif
+      let option = limit_option . ' ' . v:count
+    endif
+  endif
+  if exists('option')
+    call s:vcscommand_exec('VCSLog', option)
+  endif
+endfunction "}}}
+
+function! s:vcscommand_filetype(filetype, command) " {{{3
+  let given_count1 = v:count1
+  let revision = s:vcscommand_get_revision_on_cursor_line(a:filetype)
+  if strlen(revision)
+    let option = s:vcscommand_make_vcs_option(a:command, revision, given_count1)
+    call s:vcscommand_exec(a:command, option)
+  endif
+endfunction "}}}
+
+function! s:vcscommand_get_revision_on_cursor_line(filetype) " {{{3
+  let save_cursor = getpos('.')
+  let save_yank_register = getreg('"')
+  if a:filetype ==# 'log'
+    if &filetype ==# 'svnlog'
+      normal! j
+      ?^r\d\+\ |
+      normal! 0lye
+    elseif &filetype ==# 'gitlog'
+      normal! j
+      ?^commit\ \w\+$
+      normal! 0wy7l
+    elseif b:VCSCommandVCSType ==# 'HG'
+      normal! j
+      ?^changeset:\ \+\d\+:\w\+$
+      normal! Wyw
+    endif
+  elseif a:filetype ==# 'annotate'
+    if b:VCSCommandVCSType ==# 'SVN'
+      normal! 0wye
+    elseif b:VCSCommandVCSType ==# 'git'
+      normal! 0t yb
+    elseif b:VCSCommandVCSType ==# 'HG'
+      normal! 0f:yb
+    endif
+  endif
+  let revision = @"
+  call setpos('.', save_cursor)
+  call setreg('"', save_yank_register)
+  return revision
+endfunction "}}}
+
+function! s:vcscommand_make_vcs_option(command, revision, given_count1) " {{{3
+  let option = a:revision
+  if b:VCSCommandVCSType ==# 'SVN'
+    if a:command ==# 'VCSLog'
+      let older = a:given_count1 == 1 ? '' : a:given_count1 . ':'
+      let option = '-r ' . older . a:revision
+    elseif a:command ==# 'VCSInfo'
+      let option = '-r ' . a:revision
+    elseif a:command =~# 'VCSDiff\|VCSVimDiff'
+      let older = a:given_count1 == 1 ? str2nr(a:revision) - 1 : a:given_count1
+      let option = older . ' ' . a:revision
+    endif
+  elseif b:VCSCommandVCSType ==# 'git'
+    if a:command ==# 'VCSLog'
+      let option = '-n ' . a:given_count1 . ' ' . a:revision
+    elseif a:command =~# 'VCSDiff\|VCSVimDiff'
+      let older = a:revision . '~' . a:given_count1
+      let option = older . ' ' . a:revision
+    endif
+  elseif b:VCSCommandVCSType ==# 'HG'
+    if a:command ==# 'VCSLog'
+      let option = '-l ' . a:given_count1 . ' -r ' . a:revision
+    elseif a:command =~# 'VCSDiff\|VCSVimDiff'
+      let older = a:given_count1 == 1 ? str2nr(a:revision) - 1 : a:given_count1
+      "let option = '-r ' . older . ' -r ' . a:revision
+      let option = a:revision
+    endif
+  endif
+  return option
+endfunction "}}}
+
