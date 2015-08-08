@@ -57,10 +57,10 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'fugalh/desert.vim'
-" NeoBundle 'w0ng/vim-hybrid'
-" NeoBundle 'vim-scripts/twilight'
-" NeoBundle 'jonathanfilip/vim-lucius'
-" NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
@@ -79,9 +79,9 @@ NeoBundle 'sjl/badwolf'
 " NeoBundle 'vim-scripts/phd'
 " NeoBundle 'vim-scripts/darktango.vim'
 " NeoBundle 'vim-scripts/BusyBee'
-NeoBundle 'cocopon/Iceberg.vim'
+" NeoBundle 'cocopon/Iceberg.vim'
 " NeoBundle 'wolf-dog/nighted.vim'
-NeoBundle 'wolf-dog/lightline-nighted.vim'
+" NeoBundle 'wolf-dog/lightline-nighted.vim'
 
 " NeoBundle 'alpaca-tc/alpaca_powertabline'
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
@@ -235,7 +235,9 @@ cmap <silent> <C-e> <C-u>:NERDTreeTabsToggle<CR>
 "How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeTabsType") && b:NERDTreeTabsType == "primary") | q | endif
 
-
+" 新しいタブでctagのタグジャンプを開く
+" nnoremap <F3> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
+nnoremap <F3> <C-w><C-]><C-w>T
 
 "\ エスケープ記号
 "$ ファイル名の最後
@@ -428,6 +430,11 @@ nnoremap F <C-w>>
 nnoremap C <C-w>+
 nnoremap X <C-w>-
 
+nnoremap sT <C-w>T
+nnoremap s] <C-w><C-]>
+nnoremap <F3> <C-w><C-]><C-w>T
+
+
 " タブの移動
 function! s:MoveTabpage(num)
   if type(a:num) != type(0)
@@ -476,7 +483,7 @@ set foldmethod=marker
 " colorscheme mopkai
 " colorscheme inkpot
 " colorscheme inkpot
-" colorscheme badwolf
+colorscheme badwolf
 " colorscheme monokai
 " colorscheme mirodark
 " colorscheme codeschool
@@ -490,10 +497,12 @@ set foldmethod=marker
 " colorscheme darktango
 " colorscheme BusyBee
 " colorscheme nighted
-colorscheme molokai
-autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=88
+
+" colorscheme molokai
+autocmd vimenter * highlight Comment ctermfg=246
+" autocmd vimenter * highlight visual ctermbg=88
 autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
+autocmd vimenter * highlight Normal ctermbg=16
 
 " Setting Of Lightline.vim
 let g:lightline = {
