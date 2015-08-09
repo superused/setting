@@ -64,34 +64,36 @@ NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
-" NeoBundle 'vim-scripts/rdark'
+NeoBundle 'vim-scripts/rdark'
 " NeoBundle 'croaker/mustang-vim'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'ciaranm/inkpot'
 NeoBundle 'sjl/badwolf'
-" NeoBundle 'sickill/vim-monokai'
-" NeoBundle 'djjcast/mirodark'
-" NeoBundle '29decibel/codeschool-vim-theme'
-" NeoBundle 'morhetz/gruvbox'
-" NeoBundle 'cocopon/colorswatch.vim'
-" NeoBundle 'skammer/vim-css-color'
-" NeoBundle 'chriskempson/vim-tomorrow-theme'
-" NeoBundle 'vim-scripts/phd'
-" NeoBundle 'vim-scripts/darktango.vim'
-" NeoBundle 'vim-scripts/BusyBee'
-" NeoBundle 'cocopon/Iceberg.vim'
-" NeoBundle 'wolf-dog/nighted.vim'
 " NeoBundle 'wolf-dog/lightline-nighted.vim'
+NeoBundle 'nielsmadan/harlequin'
+
 
 " NeoBundle 'alpaca-tc/alpaca_powertabline'
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " NeoBundle 'Lokaltog/powerline-fontpatcher'
+NeoBundle 'vim-scripts/xoria256.vim'
+NeoBundle 'morhetz/gruvbox'
 
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
 NeoBundle 'thinca/vim-ref'
-" NeoBundle 'alvan/vim-php-manual'
+let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
+" let g:ref_use_vimproc=0
+
+let g:ref_detect_filetype={
+\    'laravel.php':     'phpmanual',
+\    'codeigniter.php': 'phpmanual',
+\    'fuel.php':        'phpmanual',
+\    'yii.php':         'phpmanual',}
+"}}}
 
 call neobundle#end()
 
@@ -324,7 +326,7 @@ set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
 " set listchars=eol:↲,tab:▸\
-" set listchars=tab:▸\
+set listchars=tab:▸_
 " set listchars=tab:>\ ,trail:_
 " カーソル移動関連の設定
 
@@ -359,6 +361,7 @@ set smartindent   " 改行時に入力された行の末尾に合わせて次の
 
 au BufNewFile,BufRead *.php set nowrap tabstop=4 shiftwidth=4
 au BufNewFile,BufRead *.html.twig set nowrap tabstop=4 shiftwidth=4
+au BufNewFile,BufRead *.ctp set nowrap tabstop=4 shiftwidth=4
 
 " 動作環境との統合関連の設定
 " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
@@ -368,7 +371,7 @@ set mouse=a " マウスの入力を受け付ける
 set ttymouse=xterm2
 set shellslash " Windows でもパスの区切り文字を / にする
 " インサートモードから抜けると自動的にIMEをオフにする
-"set iminsert=2
+" set iminsert=2
 
 " コマンドラインの設定
 set wildmenu "コマンドラインモードでファイル名を補完する
@@ -472,6 +475,8 @@ set foldmethod=marker
 " colorscheme mrkn256
 " colorscheme jellybeans
 " colorscheme railscasts
+" autocmd vimenter * highlight Normal ctermbg=16
+
 " colorscheme solarized
 " colorscheme iceberg
 " colorscheme rdark
@@ -483,7 +488,12 @@ set foldmethod=marker
 " colorscheme mopkai
 " colorscheme inkpot
 " colorscheme inkpot
-colorscheme badwolf
+
+" colorscheme badwolf
+" autocmd vimenter * highlight Comment ctermfg=246
+" autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
+" autocmd vimenter * highlight Normal ctermbg=16
+
 " colorscheme monokai
 " colorscheme mirodark
 " colorscheme codeschool
@@ -498,11 +508,15 @@ colorscheme badwolf
 " colorscheme BusyBee
 " colorscheme nighted
 
+colorscheme harlequin
+
+" colorscheme xoria256
+" autocmd vimenter * highlight Normal ctermbg=16
+
 " colorscheme molokai
-autocmd vimenter * highlight Comment ctermfg=246
+" autocmd vimenter * highlight Comment ctermfg=246
 " autocmd vimenter * highlight visual ctermbg=88
-autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
-autocmd vimenter * highlight Normal ctermbg=16
+" autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
@@ -705,6 +719,56 @@ augroup VCSCommand
   autocmd!
   autocmd User VCSBufferCreated call s:vcscommand_buffer_settings()
 augroup END
+
+
+"unite prefix key.
+nnoremap [unite] <Nop>
+nmap <Space>f [unite]
+ 
+"unite general settings
+"インサートモードで開始
+let g:unite_enable_start_insert = 1
+"最近開いたファイル履歴の保存数
+let g:unite_source_file_mru_limit = 200
+ 
+"file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
+let g:unite_source_file_mru_filename_format = ''
+ 
+"現在開いているファイルのディレクトリ下のファイル一覧。
+"開いていない場合はカレントディレクトリ
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"バッファ一覧
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+"レジスタ一覧
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+"最近使用したファイル一覧
+nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
+"ブックマーク一覧
+nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+"ブックマークに追加
+nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+"uniteを開いている間のキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+
+function! s:unite_my_settings()"{{{
+  "ESCでuniteを終了
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+  "入力モードのときjjでノーマルモードに移動
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  "入力モードのときctrl+wでバックスラッシュも削除
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+  "ctrl+jで縦に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+  inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+  "ctrl+jで横に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+  inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+  "ctrl+oでその場所に開く
+  nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+  inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+endfunction"}}}
+
+
 
 function! s:vcscommand_buffer_settings() "{{{3
   if !exists('b:VCSCommandCommand') | return | endif
