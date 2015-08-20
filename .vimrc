@@ -12,13 +12,13 @@ call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'Align'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'vim-scripts/vcscommand.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'itchyny/lightline.vim' " VIMのコマンドラインをかっこよくする
+NeoBundle 'tpope/vim-fugitive' " gitプラグイン
+NeoBundle 'gregsexton/gitv' "gitプラグイン
+NeoBundle 'airblade/vim-gitgutter' "gitプラグイン
+NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
+NeoBundle 'scrooloose/nerdtree' " ファイラ
+NeoBundle 'jistr/vim-nerdtree-tabs' " nerdtreeをより使いやすく
 NeoBundle 'erikw/tmux-powerline'
 " NeoBundle 'kana/vim-operator-user'
 " NeoBundle 'kana/vim-operator-replace'
@@ -35,13 +35,13 @@ NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
-NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimfiler' " ファイラ
 NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 " NeoBundle 'xolox/vim-session', {
 "         \ 'depends' : 'xolox/vim-misc',
 "         \ }
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'violetyk/neocomplete-php.vim'
+NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
+NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
 let g:neocomplete_php_locale = 'ja'
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'mattn/emmet-vim' "HTML書く
@@ -750,7 +750,7 @@ nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 "uniteを開いている間のキーマッピング
 autocmd FileType unite call s:unite_my_settings()
 
-function! s:unite_my_settings()"{{{
+function! s:unite_my_settings()
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
   "入力モードのときjjでノーマルモードに移動
@@ -766,11 +766,9 @@ function! s:unite_my_settings()"{{{
   "ctrl+oでその場所に開く
   nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
   inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
-endfunction"}}}
+endfunction
 
-
-
-function! s:vcscommand_buffer_settings() "{{{3
+function! s:vcscommand_buffer_settings()
   if !exists('b:VCSCommandCommand') | return | endif
   if b:VCSCommandCommand !=# 'commitlog' | setlocal readonly     | endif
   if b:VCSCommandCommand !=# 'vimdiff'   | setlocal nofoldenable | endif
@@ -788,17 +786,17 @@ function! s:vcscommand_buffer_settings() "{{{3
     nnoremap <silent> <buffer> l    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSLog')<CR>gg
     nnoremap <silent> <buffer> i    :<C-u>call <SID>vcscommand_filetype('annotate', 'VCSInfo')<CR>gg
   endif
-endfunction "}}}
+endfunction
 
-function! s:vcscommand_exec(command, option) "{{{3
+function! s:vcscommand_exec(command, option)
   if a:command =~# '^\(VCSDiff\|VCSLog\)$'
     let g:VCSCommandSplit = winnr('$') == 1 ? 'vertical' : 'horizontal'
   endif
   execute a:command a:option
   unlet! g:VCSCommandSplit
-endfunction "}}}
+endfunction
 
-function! s:vcscommand_log(...) "{{{3
+function! s:vcscommand_log(...)
   let option = join(a:000)
   if exists('b:VCSCommandVCSType')
     if exists('b:VCSCommandCommand')
@@ -837,18 +835,18 @@ function! s:vcscommand_log(...) "{{{3
   if exists('option')
     call s:vcscommand_exec('VCSLog', option)
   endif
-endfunction "}}}
+endfunction
 
-function! s:vcscommand_filetype(filetype, command) " {{{3
+function! s:vcscommand_filetype(filetype, command)
   let given_count1 = v:count1
   let revision = s:vcscommand_get_revision_on_cursor_line(a:filetype)
   if strlen(revision)
     let option = s:vcscommand_make_vcs_option(a:command, revision, given_count1)
     call s:vcscommand_exec(a:command, option)
   endif
-endfunction "}}}
+endfunction
 
-function! s:vcscommand_get_revision_on_cursor_line(filetype) " {{{3
+function! s:vcscommand_get_revision_on_cursor_line(filetype)
   let save_cursor = getpos('.')
   let save_yank_register = getreg('"')
   if a:filetype ==# 'log'
@@ -878,9 +876,9 @@ function! s:vcscommand_get_revision_on_cursor_line(filetype) " {{{3
   call setpos('.', save_cursor)
   call setreg('"', save_yank_register)
   return revision
-endfunction "}}}
+endfunction
 
-function! s:vcscommand_make_vcs_option(command, revision, given_count1) " {{{3
+function! s:vcscommand_make_vcs_option(command, revision, given_count1)
   let option = a:revision
   if b:VCSCommandVCSType ==# 'SVN'
     if a:command ==# 'VCSLog'
@@ -909,5 +907,5 @@ function! s:vcscommand_make_vcs_option(command, revision, given_count1) " {{{3
     endif
   endif
   return option
-endfunction "}}}
+endfunction
 
