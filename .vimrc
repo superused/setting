@@ -69,7 +69,7 @@ NeoBundle 'vim-scripts/rdark'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'ciaranm/inkpot'
 NeoBundle 'sjl/badwolf'
-" NeoBundle 'wolf-dog/lightline-nighted.vim'
+NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
 
 
@@ -312,6 +312,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 set ambiwidth=double
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
+set ambiwidth=double
 " カレント行にアンダーラインを引く
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 highlight CursorLine gui=underline ctermfg=NONE ctermbg=NONE
@@ -535,17 +536,16 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
       \ }
       \ }
 
       " \ 'colorscheme': 'nighted',
 
-      " \ 'separator': { 'left': '', 'right': '' },
-      " \ 'subseparator': { 'left': '', 'right': '' },
-
-      " \ 'component': {
-      " \   'lineinfo': ' %3l:%-2v',
-      " \ },
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction

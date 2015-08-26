@@ -1,2 +1,8 @@
 oh-my-zshの入れ方
 http://mollifier.hatenablog.com/entry/20101009/p1
+
+consolas powerline フォント
+https://github.com/runsisi/consolas-font-for-powerline
+
+tmux-powerline （使えてない）
+http://qiita.com/tkhr/items/8cc17c02dea1803be9c6

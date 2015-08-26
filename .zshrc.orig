@@ -412,7 +412,7 @@ setopt hist_reduce_blanks             # 空白は詰めて登録
 ########## alias
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -i'
+# alias rm='rm -i'
 
 alias ls='ls --color=tty'
 alias ll='ls -l'
@@ -433,8 +433,8 @@ alias javam='gnome-open /usr/local/share/doc/java-1.5.0-docs-ja/api/index.html'
 alias dict='xterm -en EUC-JP -e $HOME/bin/rdic.sh'
 alias go=gnome-open
 
-unalias rm
-rm () { echo -n 'trashed: '; la -d $*; mv $* $HOME/.Trash }
+# unalias rm
+# rm () { echo -n 'trashed: '; la -d $*; mv $* $HOME/.Trash }
 
 wl () { ll ` which $1` }
 

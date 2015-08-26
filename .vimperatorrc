@@ -28,6 +28,9 @@ set focuscontent
 set! config.trim_on_minimize=true
 "
 
+" 画面をカスタマイズ
+set toolbars=nomenu,noaddons,nobookmarks,nonavigation,tabs
+
 " 移動幅
 noremap j 5j
 noremap k 5k
@@ -164,3 +167,4 @@ statusbarpanel > * { margin: 0 !important; padding: 0 !important; }
 EOM
 
 " vim: set ft=vimperator:
+map e :javascript<Space>TreeStyleTabBrowserAutoHide.toggleMode();<CR>
