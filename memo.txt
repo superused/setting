@@ -13,12 +13,13 @@ http://chroju89.hatenablog.jp/entry/2014/07/20/105727
 
 
 
-●vim
+●vim tips
 プログラマが知るべき100のvimコマンド
 http://loumo.jp/wp/archive/20080701175525/
 vim コマンド置換
 http://yut.hatenablog.com/entry/20110723/1311422139
-
+職場で学んだ快適なVim操作のためのtips
+http://labs.timedia.co.jp/2014/09/learn-about-vim-in-the-workplace.html
 
 
 --
