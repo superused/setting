@@ -71,7 +71,8 @@ NeoBundle 'vim-scripts/rdark'
 NeoBundle 'sjl/badwolf'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
-
+NeoBundle 'itchyny/landscape.vim'
+NeoBundle 'chriskempson/base16-vim'
 
 " NeoBundle 'alpaca-tc/alpaca_powertabline'
 " NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
@@ -305,14 +306,14 @@ let colors_name = "darkblue"
 set encoding=utf8 "エンコード
 set fenc=utf-8 "エンコード
 scriptencoding utf8
-set ambiwidth=double
+" if exists('&ambiwidth')
+"     set ambiwidth=double    " UTF-8の□や○でカーソル位置がずれないようにする
+" endif "
 set fileformat=unix
 set fileformats=unix,dos,mac
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-set ambiwidth=double
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
-set ambiwidth=double
 " カレント行にアンダーラインを引く
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 highlight CursorLine gui=underline ctermfg=NONE ctermbg=NONE
@@ -521,6 +522,7 @@ colorscheme harlequin
 
 " Setting Of Lightline.vim
 let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Blue',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
@@ -908,4 +910,3 @@ function! s:vcscommand_make_vcs_option(command, revision, given_count1)
   endif
   return option
 endfunction
-

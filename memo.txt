@@ -6,3 +6,39 @@ https://github.com/runsisi/consolas-font-for-powerline
 
 tmux-powerline （使えてない）
 http://qiita.com/tkhr/items/8cc17c02dea1803be9c6
+
+主なproxyの設定場所について
+●yum
+・/etc/yum.conf
+# Proxy Setting
+proxy=http://proxy.com:portnum
+proxy_username=username
+proxy_password=password
+●wget
+・~/.wgetrc
+# Proxy Setting
+http_proxy=http://proxy.com:portnum
+proxy_user=username
+proxy_password=password
+・/etc/wgetrc
+http_proxy = http://username:password@proxy.com:portnum
+●git
+・~/.gitconfig
+[http]
+    proxy = http://username:password@proxy.com:portnum
+[https]
+    proxy = http://username:password@proxy.com:portnum
+●curl
+・~/.curlrc
+proxy-user = "username:password"
+proxy = "http://proxy.com:portnum"
+●mercurial
+・~/.hgrc
+[http_proxy]
+host=proxy.com:portnum
+user=username
+passwd=password
+●postfix
+・/etc/postfix/sasl_passwd
+[smtp.gmail.com]:587 username@systena.co.jp:password
+
