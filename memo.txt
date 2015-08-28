@@ -1,3 +1,4 @@
+
 oh-my-zshの入れ方
 http://mollifier.hatenablog.com/entry/20101009/p1
 
@@ -7,6 +8,20 @@ https://github.com/runsisi/consolas-font-for-powerline
 tmux-powerline （使えてない）
 http://qiita.com/tkhr/items/8cc17c02dea1803be9c6
 
+tmuxをきちんと使ってみる
+http://chroju89.hatenablog.jp/entry/2014/07/20/105727
+
+
+
+●vim
+プログラマが知るべき100のvimコマンド
+http://loumo.jp/wp/archive/20080701175525/
+vim コマンド置換
+http://yut.hatenablog.com/entry/20110723/1311422139
+
+
+
+--
 主なproxyの設定場所について
 ●yum
 ・/etc/yum.conf
