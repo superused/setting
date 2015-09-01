@@ -20,6 +20,8 @@ vim コマンド置換
 http://yut.hatenablog.com/entry/20110723/1311422139
 職場で学んだ快適なVim操作のためのtips
 http://labs.timedia.co.jp/2014/09/learn-about-vim-in-the-workplace.html
+Vim 作業効率を改善する150の技
+https://books.google.co.jp/books?id=QZSWbc83LfQC&pg=PA56&lpg=PA56&dq=vim+mru&source=bl&ots=i5Cgn4tlTR&sig=njPSpPA7xUforkkUy5GOxbjATMM&hl=ja&sa=X&ved=0CCwQ6AEwAjgKahUKEwiO46v0ytTHAhVG2qYKHf59ANk#v=onepage&q=vim%20mru&f=false
 
 
 --
