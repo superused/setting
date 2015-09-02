@@ -83,6 +83,8 @@ NeoBundle 'morhetz/gruvbox'
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
 NeoBundle 'thinca/vim-ref'
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
@@ -345,6 +347,8 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   "外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
+set undodir=~/.vim/undo " undoファイルの置き場
+set undofile   " ファイル編集中にundoファイルを作る "
 
 " 検索/置換の設定
 set hlsearch   " 検索文字列をハイライトする
@@ -910,3 +914,22 @@ function! s:vcscommand_make_vcs_option(command, revision, given_count1)
   endif
   return option
 endfunction
+
+"NeoSnippet
+"Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
