@@ -29,7 +29,7 @@ NeoBundle 'sgur/vim-textobj-parameter'
 NeoBundle 'osyo-manga/vim-textobj-multiblock'
 NeoBundle 'osyo-manga/vim-textobj-multitextobj'
 NeoBundle 'Shougo/context_filetype.vim'
-NeoBundle 'Lokaltog/powerline-fontpatcher'
+" NeoBundle 'Lokaltog/powerline-fontpatcher'
 " NeoBundle 'delphinus35/dotfiles'
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
@@ -56,17 +56,17 @@ NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一�
 
 
 "bundle color
-NeoBundle 'jnurmine/Zenburn'
+" NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'fugalh/desert.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'vim-scripts/twilight'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'vim-scripts/Wombat'
+" NeoBundle 'fugalh/desert.vim'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'vim-scripts/twilight'
+" NeoBundle 'jonathanfilip/vim-lucius'
+" NeoBundle 'jpo/vim-railscasts-theme'
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
-NeoBundle 'vim-scripts/rdark'
+" NeoBundle 'vim-scripts/rdark'
 " NeoBundle 'croaker/mustang-vim'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'ciaranm/inkpot'
@@ -74,13 +74,10 @@ NeoBundle 'sjl/badwolf'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'chriskempson/base16-vim'
+" NeoBundle 'chriskempson/base16-vim'
 
-" NeoBundle 'alpaca-tc/alpaca_powertabline'
-" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'vim-scripts/xoria256.vim'
-NeoBundle 'morhetz/gruvbox'
+" NeoBundle 'vim-scripts/xoria256.vim'
+" NeoBundle 'morhetz/gruvbox'
 
 "colorscheme view bundle
 NeoBundle 'Shougo/unite.vim'
