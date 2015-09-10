@@ -24,17 +24,17 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
 NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一行にまとめたり、その逆を行える
 NeoBundle 'mattn/emmet-vim' "HTML書く
+NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
+NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 
 NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
 NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 NeoBundle 'Shougo/vimfiler' " ファイラ
-NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neomru.vim' " ファイル履歴
 NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
 NeoBundle 'Shougo/neosnippet' " 補完用ファイル
 NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
-NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
-NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 "
 "bundle color
@@ -87,38 +87,8 @@ inoremap <ESC> <ESC>:set iminsert=0<CR>
 " mru.vim <C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
 
-" " neocomplete用設定
-" let g:neocomplete#enable_at_startup = 1
-" let g:neocomplete#enable_ignore_case = 1
-" let g:neocomplete#enable_smart_case = 1
-" if !exists('g:neocomplete#keyword_patterns')
-"   let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns._ = '\h\w*'
-"
-" " Plugin key-mappings.
-" inoremap <expr><C-g>     neocomplete#undo_completion()
-" inoremap <expr><C-l>     neocomplete#complete_common_string()
-"
-" " Recommended key-mappings.
-" " <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"   return neocomplete#close_popup() . "\<CR>"
-"   " For no inserting <CR> key.
-"   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-" endfunction
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" " <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplete#close_popup()
-" inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-"""""""
-
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" neocomplete用設定
+" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -292,8 +262,6 @@ set cursorline     " カーソル行の背景色を変える
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 highlight CursorLine gui=underline ctermfg=NONE ctermbg=NONE
 
-" set nocursorline     " カーソル行の強調表示をしない
-" set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=1    " メッセージ表示欄を1行確保
 set tw=0           " 自動改行しない(twは自動改行させる文字数。0だと自動改行しない)
@@ -301,11 +269,8 @@ set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
-" set listchars=eol:↲,tab:▸\
 set listchars=tab:▸_
-" set listchars=tab:>\ ,trail:_
 " カーソル移動関連の設定
-
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末の左右移動で行をまたぐ
 set scrolloff=8                " 上下8行の視界を確保
@@ -382,8 +347,6 @@ map Y y$
 
 nnoremap <C-L> :nohl<CR><C-L>
 noremap ; :
-
-"autocmd vimenter * NERDTreeTabsOpen
 
 augroup filetypedetect
     au BufRead,BufNewFile *.twig set filetype=htmldjango
@@ -495,14 +458,11 @@ let g:lightline = {
       \ }
       \ }
 
-      " \ 'colorscheme': 'nighted',
-
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-  " return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '.' : ''
   return &readonly ? '' : ''
 endfunction
 
@@ -608,53 +568,11 @@ if has('mac')
   set termencoding=utf-8
   set encoding=utf-8
   set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-  " set fileencoding=utf-8
-  " set fileencodings=utf-8,cp932
 endif
 "テスト
 
 "vim-indent-guidesプラグイン: vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
-
-" restart.vim終了時に保存するセッションオプションを設定する
-let g:restart_sessionoptions
-  \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
-" " 現在のディレクトリ直下の .vimsessions/ を取得
-" let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-" " 存在すれば
-" if isdirectory(s:local_session_directory)
-"   " session保存ディレクトリをそのディレクトリの設定
-"   let g:session_directory = s:local_session_directory
-"   " vimを辞める時に自動保存
-"   let g:session_autosave = 'yes'
-"    " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
-"   let g:session_autoload = 'yes'
-"   " 1分間に1回自動保存
-"   let g:session_autosave_periodic = 1
-" else
-"   let g:session_autosave = 'no'
-"   let g:session_autoload = 'no'
-" endif
-" unlet s:local_session_directory
-
-" yank to remote
-" let g:y2r_config = {
-"             \   'tmp_file': '/tmp/exchange_file',
-"             \   'key_file': expand('$HOME') . '/.exchange.key',
-"             \   'host': 'localhost',
-"             \   'port': 52224,
-"             \}
-" function Yank2Remote()
-"   echo 'test'
-"     call writefile(split(@", '\n'), g:y2r_config.tmp_file, 'b')
-"     let s:params = ['cat %s %s | nc -w1 %s %s']
-"     for s:item in ['key_file', 'tmp_file', 'host', 'port']
-"         let s:params += [shellescape(g:y2r_config[s:item])]
-"     endfor
-"     let s:ret = system(call(function('printf'), s:params))
-" endfunction
-" " nnoremap <silent> <unique> <Leader>y :call Yank2Remote()<CR>
-" nnoremap <silent><unique><C-y> :call Yank2Remote()<CR>
 
 " PHP環境
 let php_sql_query = 1
@@ -671,20 +589,17 @@ augroup VCSCommand
   autocmd User VCSBufferCreated call s:vcscommand_buffer_settings()
 augroup END
 
-
 "unite prefix key.
 nnoremap [unite] <Nop>
 nmap <Space>f [unite]
- 
+
 "unite general settings
 "インサートモードで開始
 let g:unite_enable_start_insert = 1
 "最近開いたファイル履歴の保存数
 let g:unite_source_file_mru_limit = 200
- 
 "file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
 let g:unite_source_file_mru_filename_format = ''
- 
 "現在開いているファイルのディレクトリ下のファイル一覧。
 "開いていない場合はカレントディレクトリ
 nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
