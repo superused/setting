@@ -10,54 +10,41 @@ if has('vim_starting')
 endif
 call neobundle#begin(expand('~/.vim/bundle'))
 
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'Align'
 NeoBundle 'itchyny/lightline.vim' " VIMのコマンドラインをかっこよくする
-NeoBundle 'tpope/vim-fugitive' " gitプラグイン
-NeoBundle 'gregsexton/gitv' "gitプラグイン
-NeoBundle 'airblade/vim-gitgutter' "gitプラグイン
-NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
+NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 NeoBundle 'scrooloose/nerdtree' " ファイラ
 NeoBundle 'jistr/vim-nerdtree-tabs' " nerdtreeをより使いやすく
-NeoBundle 'erikw/tmux-powerline'
-" NeoBundle 'kana/vim-operator-user'
-" NeoBundle 'kana/vim-operator-replace'
-"NeoBundle 'Lokaltog/powerline'
-" NeoBundle 'osyo-manga/vim-precious'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'sgur/vim-textobj-parameter'
-NeoBundle 'osyo-manga/vim-textobj-multiblock'
-NeoBundle 'osyo-manga/vim-textobj-multitextobj'
-NeoBundle 'Shougo/context_filetype.vim'
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
-" NeoBundle 'delphinus35/dotfiles'
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
+NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
+NeoBundle 'gregsexton/gitv' "gitプラグイン
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
-NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
-NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
-NeoBundle 'Shougo/vimfiler' " ファイラ
-NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
-" NeoBundle 'xolox/vim-session', {
-"         \ 'depends' : 'xolox/vim-misc',
-"         \ }
-NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
-NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
-let g:neocomplete_php_locale = 'ja'
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
-NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'scrooloose/syntastic' "syntaxチェック
 NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
-" NeoBundle 'alpaca-tc/alpaca_powertabline'
-" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
-" NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
-" NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
+NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
 NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一行にまとめたり、その逆を行える
+NeoBundle 'mattn/emmet-vim' "HTML書く
 
-
+NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
+NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
+NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
+NeoBundle 'Shougo/vimfiler' " ファイラ
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
+NeoBundle 'Shougo/neosnippet' " 補完用ファイル
+NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
+NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
+NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
+" NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
+"
 "bundle color
-" NeoBundle 'jnurmine/Zenburn'
+NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'wolf-dog/lightline-nighted.vim'
+NeoBundle 'nielsmadan/harlequin'
+NeoBundle 'itchyny/landscape.vim'
+" NeoBundle 'jnurmine/Zenburn'
 " NeoBundle 'fugalh/desert.vim'
 " NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'vim-scripts/twilight'
@@ -65,27 +52,20 @@ NeoBundle 'nanotech/jellybeans.vim'
 " NeoBundle 'jpo/vim-railscasts-theme'
 " NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/Wombat'
-NeoBundle 'tomasr/molokai'
 " NeoBundle 'vim-scripts/rdark'
 " NeoBundle 'croaker/mustang-vim'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'ciaranm/inkpot'
-NeoBundle 'sjl/badwolf'
-NeoBundle 'wolf-dog/lightline-nighted.vim'
-NeoBundle 'nielsmadan/harlequin'
-NeoBundle 'itchyny/landscape.vim'
 " NeoBundle 'chriskempson/base16-vim'
-
 " NeoBundle 'vim-scripts/xoria256.vim'
 " NeoBundle 'morhetz/gruvbox'
 
-"colorscheme view bundle
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
-NeoBundle 'thinca/vim-ref'
+call neobundle#end()
+
+" neocomplete-php
+let g:neocomplete_php_locale = 'ja'
+
+" vim-ref用設定ファイル
 let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
 let g:ref_phpmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
 " let g:ref_use_vimproc=0
@@ -97,16 +77,14 @@ let g:ref_detect_filetype={
 \    'yii.php':         'phpmanual',}
 "}}}
 
-call neobundle#end()
-
 " ESCでIMEを確実にOFF
 inoremap <ESC> <ESC>:set iminsert=0<CR>
 
-"<C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
+" <C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
 " set splitbelow "新しいウインドウを下に開く
 " nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
 
-"<C-h>で最近開いたファイルの履歴を見る
+" mru.vim <C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
 
 " " neocomplete用設定
@@ -150,24 +128,24 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
- 
+
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
       \ 'default' : '',
       \ 'vimshell' : $HOME.'/.vimshell_hist',
       \ 'scheme' : $HOME.'/.gosh_completions'
       \ }
- 
+
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
   let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
- 
+
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
- 
+
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -185,7 +163,7 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
- 
+
 " For cursor moving in insert mode(Not recommended)
 "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
 "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
@@ -195,16 +173,16 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "let g:neocomplete#enable_cursor_hold_i = 1
 " Or set this.
 "let g:neocomplete#enable_insert_char_pre = 1
- 
+
 " AutoComplPop like behavior.
 "let g:neocomplete#enable_auto_select = 1
- 
+
 " Shell like behavior(not recommended).
 "set completeopt+=longest
 "let g:neocomplete#enable_auto_select = 1
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
- 
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -222,8 +200,8 @@ if !has('gui_running')
     set timeoutlen=100
 endif
 "<C-e>でNERDTreeをオンオフ。いつでもどこでも
-"	map <silent> <C-e>   :NERDTreeTabsToggle<CR>
-"	lmap <silent> <C-e>  :NERDTreeTabsToggle<CR>
+" map <silent> <C-e>   :NERDTreeTabsToggle<CR>
+" lmap <silent> <C-e>  :NERDTreeTabsToggle<CR>
 nmap <silent> <C-e>      :NERDTreeTabsToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeTabsToggle<CR>
 omap <silent> <C-e>      :NERDTreeTabsToggle<CR>
@@ -255,11 +233,6 @@ let g:NERDTreeMinimalUI=1 "ブックマークや、ヘルプのショートカ�
 let g:NERDTreeDirArrows=0 "NERDTreeを+|`などを使ってツリー表示をする。 1 : +|`などを使わない
 let g:NERDTreeMouseMode=2 "マウス操作方法 1 : ファイル、ディレクトリ両方共ダブルクリックで開く。 2 : ディレクトリのみシングルクリックで開く。3 : ファイル、ディレクトリ両方共シングルクリックで開く。
 let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの設置場所を指定。 0 : 行番号を表示しない。
-
-"NERDTreeStatusline NERDtreeウィンドウにステータスラインを表示。
-"Values: Any valid statusline setting.
-"Default: %{b:NERDTreeRoot.path.strForOS(0)}
-
 
 autocmd FileType gitv call s:my_gitv_settings()
 function! s:my_gitv_settings()
@@ -301,7 +274,7 @@ hi clear
 if exists("syntax_on")
 syntax reset
 endif
-"
+
 let colors_name = "darkblue"
 
 set encoding=utf8 "エンコード
@@ -477,43 +450,14 @@ set pastetoggle=<F4>
 
 set foldmethod=marker
 
-" colorscheme zenburn
-" colorscheme hybrid
-" colorscheme mrkn256
 " colorscheme jellybeans
 " colorscheme railscasts
 " autocmd vimenter * highlight Normal ctermbg=16
-
-" colorscheme solarized
-" colorscheme iceberg
-" colorscheme rdark
-" colorscheme wombat
-" colorscheme lucius
-" colorscheme twilight
-" colorscheme desert
-" colorscheme pyte
-" colorscheme mopkai
-" colorscheme inkpot
-" colorscheme inkpot
 
 " colorscheme badwolf
 " autocmd vimenter * highlight Comment ctermfg=246
 " autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " autocmd vimenter * highlight Normal ctermbg=16
-
-" colorscheme monokai
-" colorscheme mirodark
-" colorscheme codeschool
-" colorscheme gruvbox
-" colorscheme Tomorrow-Night-Blue
-" colorscheme Tomorrow-Night-Bright
-" colorscheme Tomorrow-Night-Eighties
-" colorscheme Tomorrow-Night
-" colorscheme Tomorrow
-" colorscheme phd
-" colorscheme darktango
-" colorscheme BusyBee
-" colorscheme nighted
 
 colorscheme harlequin
 
