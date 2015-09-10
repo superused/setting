@@ -52,6 +52,8 @@ NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 " NeoBundle 'Lokaltog/powerline-fontpatcher'
 " NeoBundle 'kana/vim-fakeclip' "tmux や screen を使っていてもVimのヤンク(y)やペースト(p)のときにクリップボード(正確には pbcopy/pbpaste )が使われるようになります。
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
+NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一行にまとめたり、その逆を行える
+
 
 "bundle color
 NeoBundle 'jnurmine/Zenburn'
@@ -443,6 +445,8 @@ nnoremap sT <C-w>T
 nnoremap s] <C-w><C-]>
 nnoremap <F3> <C-w><C-]><C-w>T
 
+nmap s- :SplitjoinSplit<CR>
+nmap s^ :SplitjoinJoin<CR>
 
 " タブの移動
 function! s:MoveTabpage(num)
