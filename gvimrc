@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 27-Apr-2015.
+" Last Change: 01-Oct-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -188,15 +188,16 @@ source $VIMRUNTIME/delmenu.vim
 set langmenu=ja_jp.utf-8
 source $VIMRUNTIME/menu.vim
 
-set guifont=Consolas:h11,Lucida_Console:h11:w5 guifontwide=MeiryoKe_console:h11
-" set guifont=Consolas:h11,Lucida_Console:h11:w5 guifontwide=MS_Gothic:h11
+" set guifont=Consolas:h11,Lucida_Console:h11:w5 guifontwide=MeiryoKe_console:h11
+set guifont=Consolas:h12,Lucida_Console:h12:w5 guifontwide=MS_Gothic:h12
 
 " 勝手に改行するのをやめる
 set textwidth=0
 " textwidthで改行したくない
 set formatoptions=q
 
-colorscheme molokai
+" colorscheme molokai
+colorscheme harlequin
 " colorscheme jellybeans
 " colorscheme hybrid
 " colorscheme lucius
