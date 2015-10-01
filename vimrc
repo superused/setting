@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 07-May-2015.
+" Last Change: 01-Oct-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -261,20 +261,21 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
 " NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'tomtom/tcomment_vim' "コメントを楽に行う
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/vimfiler.vim'
+" NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 
 "bundle color
-NeoBundle 'nanotech/jellybeans.vim'
+" NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'tomasr/molokai'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'nielsmadan/harlequin'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'jonathanfilip/vim-lucius'
+" NeoBundle 'altercation/vim-colors-solarized'
 
 "colorscheme view bundle
-NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/unite.vim'
 " NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme
 
 call neobundle#end()
@@ -410,8 +411,9 @@ set encoding=utf8 "エンコード
 set fenc=utf-8 "エンコード
 scriptencoding utf8
 set ambiwidth=double
-set fileformat=unix
-set fileformats=unix,dos,mac
+" set fileformat=unix
+" set fileformats=unix,dos,mac
+set fileformat=dos
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set ambiwidth=double
 set number         " 行番号を表示する
@@ -447,6 +449,8 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   "外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
+set undodir=C:/vim74-kaoriya-win64/undo/ " undoファイルの置き場
+set undofile   " ファイル編集中にundoファイルを作る "
 
 " 検索/置換の設定
 set hlsearch   " 検索文字列をハイライトする
