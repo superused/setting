@@ -38,27 +38,12 @@ NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 "
 "bundle color
-NeoBundle 'tomasr/molokai'
-NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'sjl/badwolf'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'itchyny/landscape.vim'
-" NeoBundle 'jnurmine/Zenburn'
-" NeoBundle 'fugalh/desert.vim'
-" NeoBundle 'w0ng/vim-hybrid'
-" NeoBundle 'vim-scripts/twilight'
-" NeoBundle 'jonathanfilip/vim-lucius'
-" NeoBundle 'jpo/vim-railscasts-theme'
-" NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'vim-scripts/Wombat'
-" NeoBundle 'vim-scripts/rdark'
-" NeoBundle 'croaker/mustang-vim'
-" NeoBundle 'mrkn/mrkn256.vim'
-" NeoBundle 'ciaranm/inkpot'
-" NeoBundle 'chriskempson/base16-vim'
-" NeoBundle 'vim-scripts/xoria256.vim'
-" NeoBundle 'morhetz/gruvbox'
+NeoBundle 'vim-scripts/carrot.vim'
+NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 
 call neobundle#end()
 
