@@ -14,6 +14,8 @@ http://chroju89.hatenablog.jp/entry/2014/07/20/105727
 メイリオConsole版のインストール
 http://www.sukicomi.net/2012/11/meiryo-console.html
 
+vim 256色一覧
+http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 
 ●vim tips
