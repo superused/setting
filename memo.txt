@@ -11,6 +11,9 @@ http://qiita.com/tkhr/items/8cc17c02dea1803be9c6
 tmuxをきちんと使ってみる
 http://chroju89.hatenablog.jp/entry/2014/07/20/105727
 
+メイリオConsole版のインストール
+http://www.sukicomi.net/2012/11/meiryo-console.html
+
 
 
 ●vim tips
