@@ -44,6 +44,7 @@ NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'vim-scripts/carrot.vim'
 NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'superused/vimcolor'
 
 call neobundle#end()
 
@@ -102,7 +103,7 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
-" <CR>: close popup and save indent.
+"<CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   return neocomplete#close_popup() . "\<CR>"
@@ -187,6 +188,7 @@ let g:NERDTreeWinSize=30 "NERDTreeのツリーの幅
 let g:NERDTreeMinimalUI=1 "ブックマークや、ヘルプのショートカットをメニューに表示する。
 let g:NERDTreeDirArrows=0 "NERDTreeを+|`などを使ってツリー表示をする。 1 : +|`などを使わない
 let g:NERDTreeMouseMode=2 "マウス操作方法 1 : ファイル、ディレクトリ両方共ダブルクリックで開く。 2 : ディレクトリのみシングルクリックで開く。3 : ファイル、ディレクトリ両方共シングルクリックで開く。
+let g:NERDTreeShowBookmarks=1 " ブックマークを最初から表示
 let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの設置場所を指定。 0 : 行番号を表示しない。
 
 autocmd FileType gitv call s:my_gitv_settings()
@@ -350,6 +352,7 @@ nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
+nnoremap sx <C-w>x
 nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
@@ -358,6 +361,8 @@ nnoremap S <C-w><
 nnoremap F <C-w>>
 nnoremap C <C-w>+
 nnoremap X <C-w>-
+nnoremap sT :Unite tab<CR>
+nnoremap sB :Unite buffer<CR>
 
 nnoremap sT <C-w>T
 nnoremap s] <C-w><C-]>
@@ -365,6 +370,11 @@ nnoremap <F3> <C-w><C-]><C-w>T
 
 nmap s- :SplitjoinSplit<CR>
 nmap s^ :SplitjoinJoin<CR>
+
+" 連番入力
+nnoremap <silent> co :ContinuousNumber <C-a><CR>
+vnoremap <silent> co :ContinuousNumber <C-a><CR>
+command! -count -nargs=1 ContinuousNumber let snf=&nf|set nf-=octal|let cl = col('.')|for nc in range(1, <count>?<count>-line('.'):1)|exe 'normal! j' . nc . <q-args>|call cursor('.', cl)|endfor|unlet cl|unlet snf
 
 " タブの移動
 function! s:MoveTabpage(num)
