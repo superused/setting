@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 01-Oct-2015.
+" Last Change: 10-Dec-2015.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -158,7 +158,7 @@ set ruler
 " タブや改行を表示 (list:表示)
 set nolist
 " どの文字でタブや改行を表示するかを設定
-"set listchars=tab:>-,extends:<,trail:-,eol:<
+set listchars=tab:>-,extends:<,trail:-,eol:<
 " 長い行を折り返して表示 (nowrap:折り返さない)
 set wrap
 " 常にステータス行を表示 (詳細は:he laststatus)
@@ -264,7 +264,11 @@ NeoBundle 'tomtom/tcomment_vim' "コメントを楽に行う
 " NeoBundle 'Shougo/vimfiler.vim'
 " NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
+NeoBundle 'scrooloose/syntastic' "syntaxチェック
+NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'vim-scripts/Visual-Mark' "ハイライト表示
 
 "bundle color
 " NeoBundle 'nanotech/jellybeans.vim'
@@ -273,6 +277,9 @@ NeoBundle 'nielsmadan/harlequin'
 " NeoBundle 'w0ng/vim-hybrid'
 " NeoBundle 'jonathanfilip/vim-lucius'
 " NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'vim-scripts/carrot.vim'
+NeoBundle 'superused/vimcolor'
 
 "colorscheme view bundle
 " NeoBundle 'Shougo/unite.vim'
@@ -322,6 +329,7 @@ if !has('gui_running')
     set ttimeout
     set timeoutlen=100
 endif
+
 "<C-e>でNERDTreeをオンオフ。いつでもどこでも
 "	map <silent> <C-e>   :NERDTreeTabsToggle<CR>
 "	lmap <silent> <C-e>  :NERDTreeTabsToggle<CR>
@@ -354,6 +362,7 @@ let g:NERDTreeMinimalUI=1 "ブックマークや、ヘルプのショートカ�
 let g:NERDTreeDirArrows=0 "NERDTreeを+|`などを使ってツリー表示をする。 1 : +|`などを使わない
 let g:NERDTreeMouseMode=2 "マウス操作方法 1 : ファイル、ディレクトリ両方共ダブルクリックで開く。 2 : ディレクトリのみシングルクリックで開く。3 : ファイル、ディレクトリ両方共シングルクリックで開く。
 let g:NERDTreeShowBookmarks=1 " ブックマークを最初から表示
+let g:NERDTreeCopyCmd= 'cp -r ' " GVimでコピーを有効にする
 let NERDTreeShowLineNumbers=0 "ブックマークを記録したファイルの設置場所を指定。 0 : 行番号を表示しない。
 
 " 起動時にはNERDTreeを表示しない
@@ -408,12 +417,14 @@ endif
 " let colors_name = "darkblue"
 
 set encoding=utf8 "エンコード
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fenc=utf-8 "エンコード
 scriptencoding utf8
 set ambiwidth=double
 " set fileformat=unix
 " set fileformats=unix,dos,mac
-set fileformat=dos
+" set fileformat=dos
+set fileformats=dos,unix,mac
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set ambiwidth=double
 set number         " 行番号を表示する
@@ -461,9 +472,9 @@ set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
 set expandtab     " タブ入力を複数の空白入力に置き換える
-set tabstop=2     " 画面上でタブ文字が占める幅
-set shiftwidth=2  " 自動インデントでずれる幅
-set softtabstop=2 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set tabstop=4     " 画面上でタブ文字が占める幅
+set shiftwidth=4  " 自動インデントでずれる幅
+set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent    " 改行時に前の行のインデントを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
@@ -543,6 +554,11 @@ nnoremap X <C-w>-
 nnoremap sT :Unite tab<CR>
 nnoremap sB :Unite buffer<CR>
 
+" 連番入力
+nnoremap <silent> co :ContinuousNumber <C-a><CR>
+vnoremap <silent> co :ContinuousNumber <C-a><CR>
+command! -count -nargs=1 ContinuousNumber let snf=&nf|set nf-=octal|let cl = col('.')|for nc in range(1, <count>?<count>-line('.'):1)|exe 'normal! j' . nc . <q-args>|call cursor('.', cl)|endfor|unlet cl|unlet snf
+
 " タブの移動
 function! s:MoveTabpage(num)
   if type(a:num) != type(0)
@@ -606,9 +622,9 @@ set foldmethod=marker
 " colorscheme BusyBee
 " colorscheme nighted
 " colorscheme molokai
-autocmd vimenter * highlight Comment ctermfg=247
-autocmd vimenter * highlight visual ctermbg=88
-autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
+" autocmd vimenter * highlight Comment ctermfg=247
+" autocmd vimenter * highlight visual ctermbg=88
+" autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 
 " Setting Of Lightline.vim
 let g:lightline = {
@@ -827,3 +843,23 @@ set guioptions-=b
 " unlet s:local_session_directory
 
 set showtabline=2 
+
+" Open junk file."{{{
+command! -nargs=0 JunkFile call s:open_junk_file()
+function! s:open_junk_file()
+  let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+  if !isdirectory(l:junk_dir)
+    call mkdir(l:junk_dir, 'p')
+  endif
+
+  let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+  if l:filename != ''
+    execute 'edit ' . l:filename
+  endif
+endfunction
+"}}}
+
+" visualmark.vim
+" http://nanasi.jp/articles/vim/visualmark_vim.html
+map <unique> <F3> <Plug>Vm_toggle_sign
+map <silent> <unique> mm <Plug>Vm_toggle_sign
