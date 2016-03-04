@@ -23,7 +23,7 @@ NeoBundle 'scrooloose/syntastic' "syntaxチェック
 NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
 NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
 NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一行にまとめたり、その逆を行える
-NeoBundle 'mattn/emmet-vim' "HTML書く
+" NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
 NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 
@@ -31,17 +31,17 @@ NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
 NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
 NeoBundle 'Shougo/vimfiler' " ファイラ
-NeoBundle 'Shougo/neomru.vim' " ファイル履歴
+" NeoBundle 'Shougo/neomru.vim' " ファイル履歴
 NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
 NeoBundle 'Shougo/neosnippet' " 補完用ファイル
 NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 "
 "bundle color
-NeoBundle 'sjl/badwolf'
+" NeoBundle 'sjl/badwolf'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
-NeoBundle 'itchyny/landscape.vim'
+" NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'vim-scripts/carrot.vim'
 NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'superused/vimcolor'
@@ -417,7 +417,8 @@ set foldmethod=marker
 " autocmd vimenter * highlight Normal guifg=#ffffff ctermfg=white
 " autocmd vimenter * highlight Normal ctermbg=16
 
-colorscheme harlequin
+" colorscheme harlequin
+colorscheme harlequin2
 
 " colorscheme xoria256
 " autocmd vimenter * highlight Normal ctermbg=16
