@@ -17,6 +17,7 @@ NeoBundle 'jistr/vim-nerdtree-tabs' " nerdtreeをより使いやすく
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
 NeoBundle 'gregsexton/gitv' "gitプラグイン
+NeoBundle 'tpope/vim-fugitive' "gitプラグイン用
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
 NeoBundle 'scrooloose/syntastic' "syntaxチェック
