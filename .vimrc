@@ -27,6 +27,7 @@ NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一�
 " NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
 NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
+NeoBundle 'vim-scripts/taglist.vim' " タグリストを表示
 
 NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
@@ -69,7 +70,7 @@ inoremap <ESC> <ESC>:set iminsert=0<CR>
 
 " <C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
 " set splitbelow "新しいウインドウを下に開く
-" nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
+nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
 
 " mru.vim <C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
@@ -568,6 +569,10 @@ if has('mac')
 endif
 "テスト
 
+" 外部Grepの設定
+set grepprg=grep\ -nH
+au QuickfixCmdPost grep copen "grep検索結果を自動で表示
+
 "vim-indent-guidesプラグイン: vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
 
@@ -789,4 +794,27 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
+endif
+
+" insert modeで開始
+let g:unite_enable_start_insert = 1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" grep検索
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+" カーソル位置の単語をgrep検索
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+" grep検索結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
 endif
