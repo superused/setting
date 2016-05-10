@@ -32,7 +32,7 @@ NeoBundle 'vim-scripts/taglist.vim' " タグリストを表示
 NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
 NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
-NeoBundle 'Shougo/vimfiler' " ファイラ
+" NeoBundle 'Shougo/vimfiler' " ファイラ
 " NeoBundle 'Shougo/neomru.vim' " ファイル履歴
 NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
 NeoBundle 'Shougo/neosnippet' " 補完用ファイル
@@ -44,8 +44,8 @@ NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
 " NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'vim-scripts/carrot.vim'
-NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+" NeoBundle 'vim-scripts/carrot.vim'
+" NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'superused/vimcolor'
 
 call neobundle#end()
@@ -66,7 +66,7 @@ let g:ref_detect_filetype={
 "}}}
 
 " ESCでIMEを確実にOFF
-inoremap <ESC> <ESC>:set iminsert=0<CR>
+inoremap <ESC> <ESC><ESC>:set iminsert=0<CR>
 
 " <C-s>でvimshellを開くウィンドウが固まる場合は~/.bashrcに記述を追加→stty stop undef
 " set splitbelow "新しいウインドウを下に開く
@@ -370,6 +370,34 @@ nnoremap sT <C-w>T
 nnoremap s] <C-w><C-]>
 nnoremap <F3> <C-w><C-]><C-w>T
 
+" jjでノーマルモードに戻す
+inoremap <silent> jj <ESC>
+
+" 矢印キーでなら行内を動けるようにする
+nnoremap <Down> gj
+nnoremap <Up>   gk
+
+" 入力モードでのカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
+" 日本語入力で”っj”と入力してもEnterキーで確定させればインサートモードを抜ける
+inoremap <silent> っj <ESC>
+inoremap <silent> ｊｊ <ESC>
+
+" 日本語入力がオンのままでも使えるコマンド(Enterキーは必要)
+nnoremap あ a
+nnoremap い i
+nnoremap う u
+nnoremap お o
+nnoremap っd dd
+nnoremap ｄｄ dd
+nnoremap っy yy
+nnoremap ｙｙ yy
+
+" 配列のインデントコマンド
 nmap s- :SplitjoinSplit<CR>
 nmap s^ :SplitjoinJoin<CR>
 
@@ -401,8 +429,6 @@ command! -nargs=1 TabMove :call <SID>MoveTabpage(<f-args>)
 
 nnoremap <silent><C-k> :call <SID>MoveTabpage(1)<Return><CR>
 nnoremap <silent><C-j> :call <SID>MoveTabpage(-1)<Return><CR>
-
-inoremap <silent> jj <ESC>
 
 " F4でインサートモードの切り替えを行う
 imap <F4> <nop>
@@ -573,7 +599,7 @@ endif
 set grepprg=grep\ -nH
 au QuickfixCmdPost grep copen "grep検索結果を自動で表示
 
-"vim-indent-guidesプラグイン: vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+" vim-indent-guidesプラグイン: vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
 
 " PHP環境
