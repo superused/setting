@@ -74,6 +74,8 @@ nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
 
 " mru.vim <C-h>で最近開いたファイルの履歴を見る
 nmap <silent> <C-h>      :MRU<CR>
+" MRUで履歴を保存するファイル数
+let MRU_Max_Entries = 10000
 
 " neocomplete用設定
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
