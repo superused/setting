@@ -27,7 +27,7 @@ NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一�
 " NeoBundle 'mattn/emmet-vim' "HTML書く
 NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
 NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
-NeoBundle 'vim-scripts/taglist.vim' " タグリストを表示
+" NeoBundle 'vim-scripts/taglist.vim' " タグリストを表示
 
 NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
