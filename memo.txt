@@ -65,3 +65,176 @@ passwd=password
 ・/etc/postfix/sasl_passwd
 [smtp.gmail.com]:587 username@systena.co.jp:password
 
+
+------------------------------------------
+
+■ luaの入ったVIMをインストール
+cd /usr/local/src
+sudo yum install mercurial ncurses-devel lua lua-devel
+
+vimをmakeインストールする
+
+cd /usr/local/bin/
+wget ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+tar xvf vim-7.4.tar.bz2
+cd vim74
+./configure \
+    --with-features=huge \
+    --enable-multibyte \
+    --enable-luainterp=dynamic \
+    --enable-gpm \
+    --enable-cscope \
+    --enable-fontset
+make
+make install
+
+------------------------------------------
+
+■ CentOS7の構築メモ
+6.7のことを最初は書いてます
+※
+
+ネットワークを止める
+/etc/rc.d/init.d/network stop
+
+ネットワーク設定画面
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+
+修正箇所
+# NICの有効化
+ONBOOT="yes"
+# DHCPサーバとして起動
+BOOTPROTO="dhcp"
+
+/etc/rc.d/init.d/network start
+
+
+■ここからCentOS7について
+
+■パッケージのアップデート状態
+yum -y update
+
+■パッケージのインストール
+yum install gcc make kernel-headers perl net-tools
+yum install wget
+
+■SELinuxを無効
+vi /etc/sysconfig/selinux
+SELINUX=disabled
+SELINUXTYPE=targeted
+
+■ファイアウォールを無効
+systemctl stop firewalld
+systemctl disable firewalld
+
+■yumリポジトリ追加
+yum install epel-release
+rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+
+■PHPインストール
+OS標準のまま
+php:5.4.16
+
+■Postgresql9.5インストール
+yum install postgresql95-server postgresql95-devel postgresql95-contrib
+
+■apacheインストール
+OS標準のまま
+httpd:2.4.6
+
+■apache起動・確認
+systemctl start httpd
+※ブラウザーでURLを指定し確認
+
+■apache自動起動
+systemctl enable httpd.service
+
+■Postgresql9.5
+未設定
+
+
+ @-sudoer設定
+su -
+visudo
+
+## Allow root to run any commands anywhere
+     98 root    ALL=(ALL)       ALL
+     99 shimojo ALL=(ALL)       ALL
+
+
+ |tmuxインストール
+yum install -y tmux
+|ntpdateインストール
+yum install -y ntpdate
+
+lua入りvimをインストール
+yum install mercurial lua lua-devel
+
+cd /usr/local/src/
+wget ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+tar xvf vim-7.4.tar.bz2
+cd vim74/
+./configure \
+ --enable-multibyte \
+ --with-features=huge \
+ --enable-luainterp \
+ --enable-perlinterp \
+ --enable-pythoninterp \
+ --with-python-config-dir=/usr/lib64/python2.6/config \
+ --enable-rubyinterp \
+ --with-ruby-command=/usr/bin/ruby \
+make
+make install
+
+-------------------
+
+PostgreSQLのセットアップ
+/usr/pgsql-9.5/bin/postgresql95-setup initdb
+PostgreSQL起動
+systemctl start postgresql-9.5
+CentOS立ち上げで自動起動
+systemctl enable postgresql-9.5
+systemctl enable httpd
+
+php.iniにpgsqlを反映
+extension=pgsql.so
+
+systemctl restart httpd
+
+ @-PostgreSQLにddlをインポート
+su -
+su - postgres
+ddlをpostgresのルート下に置く
+psql -f sql.ddl
+create role shimojo with superuser;
+alter role shimojo with createdb;
+
+sudo vim /etc/php.ini
+date.timezone = 'Asia/Tokyo'
+sudo systemctl restart httpd
+
+
+|memcachedをインストール
+yum install memcached
+yum install php-pecl-memcached
+yum install zlib-devel
+yum install php-devel
+
+pecl install memcache
+
+php.iniにmemcacheを反映
+extension=memcache.so
+
+systemctl restart httpd
+
+/var/lib/pgsql/9.5/data/postgresql.conf　を編集
+listen_addresses = '*'
+
+|PostgreSQLに接続できるように /var/lib/pgsql/9.5/data/pg_hba.confを修正
+host    all             all             ::1/128                 ident
+↓
+host    all             all             ::1/128                 trust
+
+systemctl restart postgresql-9.5
+
