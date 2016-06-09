@@ -16,7 +16,8 @@ NeoBundle 'scrooloose/nerdtree' " ファイラ
 NeoBundle 'jistr/vim-nerdtree-tabs' " nerdtreeをより使いやすく
 NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
 NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
-NeoBundle 'gregsexton/gitv' "gitプラグイン
+NeoBundle 'gregsexton/gitv' "gitログの可視化
+NeoBundle 'airblade/vim-gitgutter' "gitでの変更部分に印がつく
 NeoBundle 'tpope/vim-fugitive' "gitプラグイン用
 NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
 NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
@@ -286,7 +287,7 @@ set smartcase  " 大文字と小文字が混在した言葉で検索を行った
 set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移る
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
-set expandtab     " タブ入力を複数の空白入力に置き換える
+" set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=4     " 画面上でタブ文字が占める幅
 set shiftwidth=4  " 自動インデントでずれる幅
 set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
