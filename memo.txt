@@ -189,7 +189,7 @@ make install
 
 -------------------
 
-PostgreSQLのセットアップ
+■PostgreSQLのセットアップ
 /usr/pgsql-9.5/bin/postgresql95-setup initdb
 PostgreSQL起動
 systemctl start postgresql-9.5
@@ -238,3 +238,33 @@ host    all             all             ::1/128                 trust
 
 systemctl restart postgresql-9.5
 
+
+ @-Jasmineのインストール、ダウンロード、解凍
+https://github.com/jasmine/jasmine/tree/master/dist
+ @-JSCover-1.0.17.zipダウンロード・解凍し、lib/の下に格納
+http://sourceforge.net/projects/jscover/files/JSCover-1.0.17.zip/download
+ @-Jasmine-Jqueryをダウンロード 「Download ZIP」をダウンロード・解凍し、lib/jasmine-jquery.js を lib/jasmine-2.2.0の下に格納
+https://github.com/velesin/jasmine-jquery
+ @-Javaのインストール
+sudo yum install java-1.8.0-openjdk-devel
+
+|JSCoverの起動
+java -Dfile.encoding=UTF-8 -jar JSCover-1.0.23/target/dist/JSCover-all.jar -ws --document-root=/var/www/html/
+
+ここから、
+http://ドメイン:8080/jscoverage.html?url=shopsearch/jasmine/SpecRunner.html
+ここにアクセスしてテスト実行
+
+
+ @-xdebugのインストール
+sudo yum -y install php-pecl-xdebug --enablerepo=epel
+ @-PHPUNITのインストール
+sudo yum install php-xml php-pear php-phpunit-PHPUnit --enablerepo=epel
+
+
+
+------------------------
+■PostgreSQLのコマンド
+alter table tablename add column;
+alter table tablename drop column;
+alter table tablename rename oldcolumn to newcolumn;
