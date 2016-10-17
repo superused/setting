@@ -69,6 +69,7 @@ passwd=password
 ------------------------------------------
 
 ■ luaの入ったVIMをインストール
+[CentOS]
 cd /usr/local/src
 sudo yum install mercurial ncurses-devel lua lua-devel
 
@@ -88,6 +89,10 @@ cd vim74
 make
 make install
 
+[Ubuntu]
+sudo aptitude install vim-gnome
+
+これだけでOK
 ------------------------------------------
 
 ■ CentOS7の構築メモ
