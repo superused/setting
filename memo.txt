@@ -273,3 +273,13 @@ sudo yum install php-xml php-pear php-phpunit-PHPUnit --enablerepo=epel
 alter table tablename add column;
 alter table tablename drop column;
 alter table tablename rename oldcolumn to newcolumn;
+
+
+■gitユーザ追加
+sudo adduser gituser
+su - shimojyo
+sudo mv /home/gituser /var/
+sudo usermod -d /var/gituser gituser
+git clone ssh://gituser@172.16.64.198/var/gituser/repository/ao.shop.search.git
+git clone ssh://gituser@172.16.64.198/var/gituser/repository/pitalium-testcase.git
+
