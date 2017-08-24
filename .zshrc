@@ -15,16 +15,16 @@ autoload colors
 colors
 case ${UID} in
 0)
-    PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-    PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-    SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
+    PROMPT="%B%{${fg[yellow]}%}%/#%{${reset_color}%}%b "
+    PROMPT2="%B%{${fg[yellow]}%}%_#%{${reset_color}%}%b "
+    SPROMPT="%B%{${fg[yellow]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
 *)
-    PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-    PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-    SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
+    PROMPT="%{${fg[yellow]}%}%/%%%{${reset_color}%} "
+    PROMPT2="%{${fg[yellow]}%}%_%%%{${reset_color}%} "
+    SPROMPT="%{${fg[yellow]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
@@ -46,8 +46,6 @@ setopt correct
 #
 setopt list_packed
 
-# no remove postfix slash of command line
-#
 setopt noautoremoveslash
 
 # no beep sound when complete list displayed
@@ -56,9 +54,6 @@ setopt nolistbeep
 
 
 ## Keybind configuration
-#
-# emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes 
-#   to end of it)
 #
 bindkey -e
 
@@ -97,7 +92,6 @@ autoload zed
 ## Prediction configuration
 #
 #autoload predict-on
-#predict-off
 
 
 ## Alias configuration
@@ -168,10 +162,10 @@ kterm)
     ;;
 cons25)
     unset LANG
-    export LSCOLORS=ExFxCxdxBxegedabagacad
-    export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+    export LSCOLORS=GxFxCxdxBxegedabagacad
+    export LS_COLORS='ln=01;36:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
     zstyle ':completion:*' list-colors \
-        'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
+        'ln=;36;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
     ;;
 esac
 
@@ -182,10 +176,10 @@ kterm*|xterm*)
     precmd() {
         echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
     }
-    export LSCOLORS=exfxcxdxbxegedabagacad
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+    export LS_COLORS='ln=36:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
     zstyle ':completion:*' list-colors \
-        'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+        'ln=36' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 esac
 
@@ -202,7 +196,7 @@ esac
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 source ~/.zplug/init.zsh
 source ~/.zsh.d/z.sh
-source ~/.zplug/zplug
+# source ~/.zplug/zplug
 
 autoload -U compinit
 compinit
@@ -211,20 +205,24 @@ compinit
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'mollifier/cd-gitroot'
+# syntax
+zplug "chrissicool/zsh-256color"
+zplug "Tarrasch/zsh-colors"
 zplug "zsh-users/zsh-syntax-highlighting" # 「ユーザ名/リポジトリ名」で記述し、ダブルクォートで見やすく括る（括らなくてもいい）
+zplug "ascii-soup/zsh-url-highlighter"
 zplug "zsh-users/zsh-history-substring-search"
-zplug "junegunn/dotfiles", as:command, of:bin/vimcat # junegunn/dotfiles にある bin の中の vimcat をコマンドとして管理する
-zplug "tcnksm/docker-alias", of:zshrc, as:plugin # tcnksm/docker-alias にある zshrc をプラグインとして管理する as: のデフォルトは plugin なので省力もできる
+zplug "junegunn/dotfiles", as:command, use:bin/vimcat # junegunn/dotfiles にある bin の中の vimcat をコマンドとして管理する
+zplug "tcnksm/docker-alias", use:zshrc, as:plugin # tcnksm/docker-alias にある zshrc をプラグインとして管理する as: のデフォルトは plugin なので省力もできる
 zplug "k4rthik/git-cal", as:command, frozen:1 # frozen: を指定すると全体アップデートのときアップデートしなくなる（デフォルトは0）
 
 # from: で特殊ケースを扱える
 # gh-r を指定すると GitHub Releases から取ってくる
-# of: で amd64 とかするとそれを持ってくる（指定しないかぎりOSにあったものを自動で選ぶ）
+# use: で amd64 とかするとそれを持ってくる（指定しないかぎりOSにあったものを自動で選ぶ）
 # コマンド化するときに file: でリネームできる（この例では fzf-bin を fzf にしてる）
 zplug "junegunn/fzf-bin", \
     as:command, \
     from:gh-r, \
-    file:fzf
+    rename-to:fzf
 # from: では gh-r の他に oh-my-zsh と gist が使える
 # oh-my-zsh を指定すると oh-my-zsh のリポジトリにある plugin/ 以下を
 # コマンド／プラグインとして管理することができる
@@ -239,14 +237,14 @@ zplug "hchbaw/opp.zsh", if:"(( ${ZSH_VERSION%%.*} < 5 ))" # if: を指定する�
 zplug "b4b4r07/79ee61f7c140c63d2786", \
     from:gist, \
     as:command, \
-    of:get_last_pane_path.sh
+    use:get_last_pane_path.sh
 
 # パイプで依存関係を表現できる 依存関係はパイプの流れのまま この例では emoji-cli は jq に依存する
 zplug "stedolan/jq", \
     as:command, \
-    file:jq, \
+    rename-to:jq, \
     from:gh-r \
-    | zplug "b4b4r07/emoji-cli"
+    on zplug "b4b4r07/emoji-cli"
 
 # check コマンドで未インストール項目があるかどうか verbose にチェックしfalse のとき（つまり未インストール項目がある）y/N プロンプトでインストールする
 if ! zplug check --verbose; then
@@ -257,3 +255,10 @@ if ! zplug check --verbose; then
 fi
 
 zplug load --verbose # プラグインを読み込み、コマンドにパスを通す
+
+export GEM_HOME=/usr/local/lib/ruby/gems/2.2.0/
+export GEM_PATH=/usr/local/lib/ruby/gems/2.2.0/
+export PATH="$PATH:/usr/bin:/usr/local/bin/"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

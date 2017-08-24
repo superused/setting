@@ -34,7 +34,7 @@ NeoBundle 'erikw/tmux-powerline' "tmux
 NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
 NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
 NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
-" NeoBundle 'Shougo/vimfiler' " ファイラ
+NeoBundle 'Shougo/vimfiler' " ファイラ
 " NeoBundle 'Shougo/neomru.vim' " ファイル履歴
 NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
 NeoBundle 'Shougo/neosnippet' " 補完用ファイル
@@ -42,13 +42,20 @@ NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
 " NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
 "
 "bundle color
-" NeoBundle 'sjl/badwolf'
+NeoBundle 'sjl/badwolf'
 NeoBundle 'wolf-dog/lightline-nighted.vim'
 NeoBundle 'nielsmadan/harlequin'
-" NeoBundle 'itchyny/landscape.vim'
-" NeoBundle 'vim-scripts/carrot.vim'
-" NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'itchyny/landscape.vim'
+NeoBundle 'vim-scripts/carrot.vim'
+NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'superused/vimcolor'
+NeoBundle 'jacoborus/tender'
+NeoBundle 'freeo/vim-kalisi'
+NeoBundle 'reedes/vim-colors-pencil'
+NeoBundle 'andreybratukhin/peakseacolor'
+NeoBundle 'vim-scripts/peaksea'
+
 
 call neobundle#end()
 
