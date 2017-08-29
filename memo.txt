@@ -113,6 +113,16 @@ BOOTPROTO="dhcp"
 
 /etc/rc.d/init.d/network start
 
+そしてwindowsでやっているなら、windows側のネットワークの設定
+ネットワークと共有センターから現在接続しているネットワークのプロパティを開き、
+「共有」タブから「ネットワークのほかのユーザーに、このコンピュータのインターネット接続をとおしての接続を許可する」にチェックをいれる。
+そして「ホーム　ネットワーク接続」にVMware Network Adapter VMnet8を指定する。
+
+一応ネットワーク側を再起動
+/etc/rc.d/init.d/network restart
+
+これでOK
+
 
 ■ここからCentOS7について
 

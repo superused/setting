@@ -1,60 +1,62 @@
-"Settings 
-let scrolltep = 30
+" Settings
+" set noautofocus
+set typelinkhints
+let searchlimit = 30
+let scrollstep = 70
 let fullpagescrollpercent = 100
-"set nohud
-set autohidecursor
-"set noinsertmappings
-set nosmoothscroll
-let blacklists = ["https://mail.google.com/*"]
-let mapleader = ","
-"let locale = "jp"
-let hintcharacters = "hjklasdfgyuiopqwertnmzxcvb"
 let barposition = "bottom"
-set autoupdategist
+let locale = "jp"
+let mapleader = ","
+let hintcharacters = "qwertyuiasdfghjklzxcvbnm"
 
-" qmarks
-" google mail/task/calendar
-let qmark m = ["https://mail.google.com"]
-let qmark t = ["https://mail.google.com/tasks/canvas"]
+" Search
+command g tabnew google
+let completionengines = ["google", "amazon"]
+let searchalias g = "google"
+let qmark t = ["http://twitter.com"]
+let qmark m = ["https://inbox.google.com/u/0/?cid=imp"]
 let qmark c = ["https://www.google.com/calendar"]
-" google translator en/ja/language tool
-let qmark e = ["javascript:var%20t=((window.getSelection&&window.getSelection())%7C%7C(document.getSelection&&document.getSelection())%7C%7C(document.selection&&document.selection.createRange&&document.selection.createRange().text));var%20e=(document.charset%7C%7Cdocument.characterSet);if(t!='')%7Blocation.href='http://translate.google.com/translate_t?text='+t+'&hl=ja&langpair=auto%7Cen&tbb=1&ie='+e;%7Delse%7Blocation.href='http://translate.google.com/translate?u='+escape(location.href)+'&hl=ja&langpair=auto%7Cen&tbb=1&ie='+e;%7D;"]
-let qmark j = ["javascript:var%20t=((window.getSelection&&window.getSelection())%7C%7C(document.getSelection&&document.getSelection())%7C%7C(document.selection&&document.selection.createRange&&document.selection.createRange().text));var%20e=(document.charset%7C%7Cdocument.characterSet);if(t!='')%7Blocation.href='http://translate.google.com/?text='+t+'&hl=ja&langpair=auto%7Cja&tbb=1&ie='+e;%7Delse%7Blocation.href='http://translate.google.com/translate?u='+encodeURIComponent(location.href)+'&hl=ja&langpair=auto%7Cja&tbb=1&ie='+e;%7D;"]
-let qmark l = ["http://www.google.com/language_tools"]
-" Feedly/Pocket/GitHub
-let qmark f = ["http://cloud.feedly.com/#latest"]
-let qmark p = ["http://getpocket.com/a/queue/"]
-let qmark g = ["http://github.com/rcmdnk"]
+let qmark i = ["http://www.inoreader.com/folder/Must%20Read"]
 
-" Move
-map <C-h> scrollLeft
-map <C-j> scrollDown
-map <C-k> scrollUp
-map <C-l> scrollRight
-map <C-u> scrollPageUp
-map <C-d> scrollPageDown
-map <C-b> scrollFullPageUp
-map <C-f> scrollFullPageDown
+" Ignore Site
+let blacklists = ["https://inbox.google.com/*"]
 
-" Navigation
+" Mapping
+map h previousTab
+map l nextTab
+map b :buffer<Space>
+map B :bookmarks<Space>
 map d closeTab
 map u lastClosedTab
-map <C-p> previousTab
-map h previousTab
-map <C-m> nextTab
-map l nextTab
-map <C-i> goForward
-map <C-o> goBack
-map :wo :new<Space>
-map ;wo :new<Space>
-map R reloadTabUncached
+map <M-i> goToInput
+map @ pinTab
+map <C-h> moveTabLeft
+map <C-l> moveTabRight
+map <M-r> reloadTabUncached
 
-" Want to make a key to yank current selected word and search it...
-"map <C-g> :execute vlhyP<CR>
-
-" Currently, ":" doesn't shows command line.
-" Need at least one charactor (use <Space> here)
-map ; :<Space>
-
-" Text boxes
 iunmapAll
+
+" yank '%title% - %url%'
+copyTitleUrl() -> {{
+  RUNTIME('getRootUrl', function(url) {
+    let ret = document.title + " - " + url;
+    Clipboard.copy(ret);
+    Status.setMessage(ret, 2);
+  });
+}}
+map yt :call copyTitleUrl<CR>
+
+" accessTokenは自分で発行して入れてね
+" yank '%title% - %bitly%'
+copyTitleBitly() -> {{
+  RUNTIME('getRootUrl', function(url) {
+    httpRequest(
+      {url: 'https://api-ssl.bitly.com/v3/shorten?access_token=pleaseSetAccessToken&format=json&longUrl='+url, json: true},
+      function(res) {
+        let ret = document.title + " - " + res.data.url;
+        Clipboard.copy(ret);
+        Status.setMessage(ret, 2);
+      });
+  });
+}}
+map yb :call copyTitleBitly<CR>
