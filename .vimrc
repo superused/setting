@@ -1,63 +1,84 @@
 set nocompatible
 filetype off
+"init command
+"mkdir -p ~/.vim/dein/repos/github.com/Shougo/dein.vim
+"git clone https://github.com/Shougo/dein.vim.git ~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" init command
-"$ mkdir -p ~/.vim/bundle
-"$ git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  " call neobundle#rc(expand('~/.vim/bundle'))
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
-call neobundle#begin(expand('~/.vim/bundle'))
 
-NeoBundle 'itchyny/lightline.vim' " VIMのコマンドラインをかっこよくする
-NeoBundle 'vim-scripts/mru.vim' "最近開いたファイルの履歴を見る :MRU
-NeoBundle 'scrooloose/nerdtree' " ファイラ
-NeoBundle 'jistr/vim-nerdtree-tabs' " nerdtreeをより使いやすく
-NeoBundle 'tomtom/tcomment_vim' "コメントON,OFFをCtrl+-で簡単に実行
-NeoBundle 'vim-scripts/vcscommand.vim' " git, svnプラグイン
-NeoBundle 'gregsexton/gitv' "gitログの可視化
-NeoBundle 'airblade/vim-gitgutter' "gitでの変更部分に印がつく
-NeoBundle 'tpope/vim-fugitive' "gitプラグイン用
-NeoBundle 'bronson/vim-trailing-whitespace' "行末の不要な半角スペースを可視化する :FixWhitespace
-NeoBundle 'Townk/vim-autoclose' "括弧を入力した際に自動で閉じ括弧を挿入する
-NeoBundle 'scrooloose/syntastic' "syntaxチェック
-NeoBundle 'tmhedberg/matchit' "対応する括弧に飛ぶ機能を強化
-NeoBundle 'violetyk/neocomplete-php.vim' " PHP用補完プラグイン
-NeoBundle 'AndrewRadev/splitjoin.vim' "複数行になっているものを一行にまとめたり、その逆を行える
-" NeoBundle 'mattn/emmet-vim' "HTML書く
-NeoBundle 'ujihisa/unite-colorscheme' " Unite -auto-preview colorscheme   colorscheme view bundle
-NeoBundle 'thinca/vim-ref' " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
-" NeoBundle 'vim-scripts/taglist.vim' " タグリストを表示
-NeoBundle 'erikw/tmux-powerline' "tmux
+" Required:
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
-NeoBundle 'Shougo/unite.vim' " なんかいろいろできる
-NeoBundle 'Shougo/vimshell' "vimからシェルを起動する
-NeoBundle 'Shougo/vimproc' "vimshellの起動に必要
-NeoBundle 'Shougo/vimfiler' " ファイラ
-" NeoBundle 'Shougo/neomru.vim' " ファイル履歴
-NeoBundle 'Shougo/neocomplete.vim' " 補完プラグイン
-NeoBundle 'Shougo/neosnippet' " 補完用ファイル
-NeoBundle 'Shougo/neosnippet-snippets' " 補完用ファイル群
-" NeoBundle 'thinca/vim-quickrun' "編集中のコードを手軽に実行して結果を確認できる
-"
+" Required:
+call dein#begin('$HOME/.vim/dein')
+
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
+
+" Add or remove your plugins here:
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('itchyny/lightline.vim') " VIMのコマンドラインをかっこよくする
+call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
+call dein#add('scrooloose/nerdtree') " ファイラ
+call dein#add('jistr/vim-nerdtree-tabs') " nerdtreeをより使いやすく
+call dein#add('tomtom/tcomment_vim') "コメントON,OFFをCtrl+-で簡単に実行
+call dein#add('vim-scripts/vcscommand.vim') " git, svnプラグイン
+call dein#add('gregsexton/gitv') "gitログの可視化
+call dein#add('airblade/vim-gitgutter') "gitでの変更部分に印がつく
+call dein#add('tpope/vim-fugitive') "gitプラグイン用
+call dein#add('bronson/vim-trailing-whitespace') "行末の不要な半角スペースを可視化する :FixWhitespace
+call dein#add('Townk/vim-autoclose') "括弧を入力した際に自動で閉じ括弧を挿入する
+call dein#add('scrooloose/syntastic') "syntaxチェック
+call dein#add('tmhedberg/matchit') "対応する括弧に飛ぶ機能を強化
+call dein#add('violetyk/neocomplete-php.vim') " PHP用補完プラグイン
+call dein#add('AndrewRadev/splitjoin.vim') "複数行になっているものを一行にまとめたり、その逆を行える
+call dein#add('ujihisa/unite-colorscheme') " Unite -auto-preview colorscheme   colorscheme view bundle
+call dein#add('thinca/vim-ref') " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
+call dein#add('erikw/tmux-powerline') "tmux
+
+call dein#add('Shougo/unite.vim') " なんかいろいろできる
+call dein#add('Shougo/vimshell') "vimからシェルを起動する
+call dein#add('Shougo/vimproc') "vimshellの起動に必要
+call dein#add('Shougo/vimfiler') " ファイラ
+call dein#add('Shougo/neocomplete.vim') " 補完プラグイン
+call dein#add('Shougo/neosnippet') " 補完用ファイル
+call dein#add('Shougo/neosnippet-snippets') " 補完用ファイル群
 "bundle color
-NeoBundle 'sjl/badwolf'
-NeoBundle 'wolf-dog/lightline-nighted.vim'
-NeoBundle 'nielsmadan/harlequin'
-NeoBundle 'itchyny/landscape.vim'
-NeoBundle 'vim-scripts/carrot.vim'
-NeoBundle 'vim-scripts/Colour-Sampler-Pack'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'superused/vimcolor'
-NeoBundle 'jacoborus/tender'
-NeoBundle 'freeo/vim-kalisi'
-NeoBundle 'reedes/vim-colors-pencil'
-NeoBundle 'andreybratukhin/peakseacolor'
-NeoBundle 'vim-scripts/peaksea'
+call dein#add('sjl/badwolf')
+call dein#add('wolf-dog/lightline-nighted.vim')
+call dein#add('nielsmadan/harlequin')
+call dein#add('itchyny/landscape.vim')
+call dein#add('vim-scripts/carrot.vim')
+call dein#add('vim-scripts/Colour-Sampler-Pack')
+call dein#add('flazz/vim-colorschemes')
+call dein#add('superused/vimcolor')
+call dein#add('jacoborus/tender')
+call dein#add('freeo/vim-kalisi')
+call dein#add('reedes/vim-colors-pencil')
+call dein#add('andreybratukhin/peakseacolor')
+call dein#add('vim-scripts/peaksea')
 
+" You can specify revision/branch/tag.
+call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
-call neobundle#end()
+" Required:
+call dein#end()
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 " neocomplete-php
 let g:neocomplete_php_locale = 'ja'
@@ -235,10 +256,6 @@ endfunction
 set nocp
 filetype plugin indent on
 
-" If there area uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
 set bg=dark
 hi clear
 if exists("syntax_on")
@@ -295,7 +312,7 @@ set smartcase  " 大文字と小文字が混在した言葉で検索を行った
 set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移る
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
-" set expandtab     " タブ入力を複数の空白入力に置き換える
+set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=4     " 画面上でタブ文字が占める幅
 set shiftwidth=4  " 自動インデントでずれる幅
 set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
