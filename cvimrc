@@ -32,8 +32,8 @@ map <M-i> goToInput
 map @ pinTab
 map <C-h> moveTabLeft
 map <C-l> moveTabRight
-map <M-r> reloadTabUncached
-
+map r reloadTab
+map R reloadTabUncached
 iunmapAll
 
 " yank '%title% - %url%'
