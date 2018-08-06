@@ -195,7 +195,7 @@ esac
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 source ~/.zplug/init.zsh
-source ~/.zsh.d/z.sh
+# source ~/.zsh.d/z.sh
 # source ~/.zplug/zplug
 
 autoload -U compinit
@@ -228,9 +228,9 @@ zplug "junegunn/fzf-bin", \
 # コマンド／プラグインとして管理することができる
 zplug "plugins/git", from:oh-my-zsh
 
-zplug "tj/n", do:"make install" # ビルド用 hook になっていて、この例ではクローン成功時に make install する シェルコマンドなら何でも受け付けるので "echo OK" などでも可
+zplug "tj/n", hook-build:"make install" # ビルド用 hook になっていて、この例ではクローン成功時に make install する シェルコマンドなら何でも受け付けるので "echo OK" などでも可
 zplug "b4b4r07/enhancd", at:v1 # ブランチロック・リビジョンロックat: はブランチとタグをサポートしている
-zplug "mollifier/anyframe", commit:4c23cb60
+zplug "mollifier/anyframe", at:4c23cb60
 zplug "hchbaw/opp.zsh", if:"(( ${ZSH_VERSION%%.*} < 5 ))" # if: を指定すると真のときのみロードを行う（クローンはする）
 
 # from: では gist を指定することができる gist のときもリポジトリと同様にタグを使うことができる
@@ -239,12 +239,12 @@ zplug "b4b4r07/79ee61f7c140c63d2786", \
     as:command, \
     use:get_last_pane_path.sh
 
-# パイプで依存関係を表現できる 依存関係はパイプの流れのまま この例では emoji-cli は jq に依存する
-zplug "stedolan/jq", \
-    as:command, \
-    rename-to:jq, \
-    from:gh-r \
-    on zplug "b4b4r07/emoji-cli"
+# # パイプで依存関係を表現できる 依存関係はパイプの流れのまま この例では emoji-cli は jq に依存する
+# zplug "stedolan/jq", \
+#     as:command, \
+#     rename-to:jq, \
+#     from:gh-r \
+#     on zplug "b4b4r07/emoji-cli"
 
 # check コマンドで未インストール項目があるかどうか verbose にチェックしfalse のとき（つまり未インストール項目がある）y/N プロンプトでインストールする
 if ! zplug check --verbose; then
