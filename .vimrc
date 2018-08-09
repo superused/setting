@@ -40,6 +40,7 @@ call dein#add('AndrewRadev/splitjoin.vim') "複数行になっているものを
 call dein#add('ujihisa/unite-colorscheme') " Unite -auto-preview colorscheme   colorscheme view bundle
 call dein#add('thinca/vim-ref') " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 call dein#add('erikw/tmux-powerline') "tmux
+call dein#add('yegappan/grep') "grep
 
 call dein#add('Shougo/unite.vim') " なんかいろいろできる
 call dein#add('Shougo/vimshell') "vimからシェルを起動する
@@ -267,9 +268,9 @@ let colors_name = "darkblue"
 set encoding=utf8 "エンコード
 set fenc=utf-8 "エンコード
 scriptencoding utf8
-" if exists('&ambiwidth')
-"     set ambiwidth=double    " UTF-8の□や○でカーソル位置がずれないようにする
-" endif "
+if exists('&ambiwidth')
+    set ambiwidth=double    " UTF-8の□や○でカーソル位置がずれないようにする
+endif "
 set fileformat=unix
 set fileformats=unix,dos,mac
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
@@ -872,3 +873,9 @@ if executable('ag')
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
 endif
+
+" grep.vim
+nnoremap <expr> gr ':Rgrep<CR>'
+let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
+let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
+let Grep_Skip_Files = '*.bak *~'  "バックアップファイルを無視する
