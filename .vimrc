@@ -28,21 +28,21 @@ call dein#add('scrooloose/nerdtree') " ファイラ
 call dein#add('jistr/vim-nerdtree-tabs') " nerdtreeをより使いやすく
 call dein#add('tomtom/tcomment_vim') "コメントON,OFFをCtrl+-で簡単に実行
 call dein#add('vim-scripts/vcscommand.vim') " git, svnプラグイン
-call dein#add('gregsexton/gitv') "gitログの可視化
+" call dein#add('gregsexton/gitv') "gitログの可視化
 call dein#add('airblade/vim-gitgutter') "gitでの変更部分に印がつく
 call dein#add('tpope/vim-fugitive') "gitプラグイン用
 call dein#add('bronson/vim-trailing-whitespace') "行末の不要な半角スペースを可視化する :FixWhitespace
 call dein#add('Townk/vim-autoclose') "括弧を入力した際に自動で閉じ括弧を挿入する
 call dein#add('scrooloose/syntastic') "syntaxチェック
 call dein#add('tmhedberg/matchit') "対応する括弧に飛ぶ機能を強化
-call dein#add('violetyk/neocomplete-php.vim') " PHP用補完プラグイン
-call dein#add('AndrewRadev/splitjoin.vim') "複数行になっているものを一行にまとめたり、その逆を行える
-call dein#add('ujihisa/unite-colorscheme') " Unite -auto-preview colorscheme   colorscheme view bundle
-call dein#add('thinca/vim-ref') " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
+" call dein#add('violetyk/neocomplete-php.vim') " PHP用補完プラグイン
+" call dein#add('AndrewRadev/splitjoin.vim') "複数行になっているものを一行にまとめたり、その逆を行える
+" call dein#add('ujihisa/unite-colorscheme') " Unite -auto-preview colorscheme   colorscheme view bundle
+" call dein#add('thinca/vim-ref') " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 call dein#add('erikw/tmux-powerline') "tmux
 call dein#add('yegappan/grep') "grep
 
-call dein#add('Shougo/unite.vim') " なんかいろいろできる
+" call dein#add('Shougo/unite.vim') " なんかいろいろできる
 call dein#add('Shougo/vimshell') "vimからシェルを起動する
 call dein#add('Shougo/vimproc') "vimshellの起動に必要
 call dein#add('Shougo/vimfiler') " ファイラ
@@ -50,19 +50,19 @@ call dein#add('Shougo/neocomplete.vim') " 補完プラグイン
 call dein#add('Shougo/neosnippet') " 補完用ファイル
 call dein#add('Shougo/neosnippet-snippets') " 補完用ファイル群
 "bundle color
-call dein#add('sjl/badwolf')
-call dein#add('wolf-dog/lightline-nighted.vim')
-call dein#add('nielsmadan/harlequin')
-call dein#add('itchyny/landscape.vim')
-call dein#add('vim-scripts/carrot.vim')
-call dein#add('vim-scripts/Colour-Sampler-Pack')
-call dein#add('flazz/vim-colorschemes')
+" call dein#add('sjl/badwolf')
+" call dein#add('wolf-dog/lightline-nighted.vim')
+" call dein#add('nielsmadan/harlequin')
+" call dein#add('itchyny/landscape.vim')
+" call dein#add('vim-scripts/carrot.vim')
+" call dein#add('vim-scripts/Colour-Sampler-Pack')
+" call dein#add('flazz/vim-colorschemes')
 call dein#add('superused/vimcolor')
-call dein#add('jacoborus/tender')
-call dein#add('freeo/vim-kalisi')
-call dein#add('reedes/vim-colors-pencil')
-call dein#add('andreybratukhin/peakseacolor')
-call dein#add('vim-scripts/peaksea')
+" call dein#add('jacoborus/tender')
+" call dein#add('freeo/vim-kalisi')
+" call dein#add('reedes/vim-colors-pencil')
+" call dein#add('andreybratukhin/peakseacolor')
+" call dein#add('vim-scripts/peaksea')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
