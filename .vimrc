@@ -20,8 +20,6 @@ call dein#begin('$HOME/.vim/dein')
 call dein#add('Shougo/dein.vim')
 
 " Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
 call dein#add('itchyny/lightline.vim') " VIMのコマンドラインをかっこよくする
 call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
 call dein#add('scrooloose/nerdtree') " ファイラ
@@ -43,12 +41,14 @@ call dein#add('erikw/tmux-powerline') "tmux
 call dein#add('yegappan/grep') "grep
 
 " call dein#add('Shougo/unite.vim') " なんかいろいろできる
-call dein#add('Shougo/vimshell') "vimからシェルを起動する
+"call dein#add('Shougo/vimshell') "vimからシェルを起動する
 call dein#add('Shougo/vimproc') "vimshellの起動に必要
 call dein#add('Shougo/vimfiler') " ファイラ
 call dein#add('Shougo/neocomplete.vim') " 補完プラグイン
 call dein#add('Shougo/neosnippet') " 補完用ファイル
 call dein#add('Shougo/neosnippet-snippets') " 補完用ファイル群
+call dein#add('Quramy/tsuquyomi') " TypeScript補完
+
 "bundle color
 " call dein#add('sjl/badwolf')
 " call dein#add('wolf-dog/lightline-nighted.vim')
