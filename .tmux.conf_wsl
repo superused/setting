@@ -71,7 +71,7 @@ bind -r L resize-pane -R 3
 bind -r s swap-pane -U
 
 # # マウス操作 2.1
-setw -g mouse
+#setw -g mouse
 # マウス操作 2.0以下
 #setw -g mode-mouse on
 #set -g mouse-select-pane on
@@ -137,10 +137,22 @@ setw -g aggressive-resize on
 unbind r
 bind r source-file ~/.tmux.conf \; display "Config file is reloaded!"
 
-#setw -g mode-keys vi
-#bind-key -T copy-mode-vi v send-keys -X begin-selection
-#bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xsel -ip && xsel -op | xsel -ib"
-#unbind -T copy-mode-vi Enter
-#bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -ip && xsel -op | xsel -ib"
+# <prefix> [でコピーモードに入った時に、vで選択を開始しyもしくはEnterで選択範囲をコピー
 
-if-shell 'test "$(uname -a | grep microsoft)" != ""' bind-key -t vi-copy Enter copy-pipe "cat | win32yank.exe -i"
+# コピーモードでvimキーバインドを使う
+setw -g mode-keys vi
+
+# 'v' で選択を始める
+bind-key -T copy-mode-vi v send -X begin-selection
+
+# 'y'と'Enter'でcopy-pipe-and-cancelを使う
+bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "win32yank.exe -i"
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "win32yank.exe -i"
+
+# マウス選択でもcopy-pipe-and-cancel
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "win32yank.exe -i"
+
+# WSL でコピー時、マウスドラッグ時にクリップボードにもコピー
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "win32yank.exe -i"
+bind p run-shell 'win32yank.exe -o | xargs -0 -I{} tmux set-buffer -- {} && tmux paste-buffer'

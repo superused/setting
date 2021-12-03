@@ -326,7 +326,8 @@ au BufNewFile,BufRead *.ctp set nowrap tabstop=4 shiftwidth=4
 
 " 動作環境との統合関連の設定
 " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
-set clipboard=unnamedplus
+set clipboard&
+set clipboard^=unnamedplus
 set clipboard+=autoselect
 set mouse=a " マウスの入力を受け付ける
 set ttymouse=xterm2
