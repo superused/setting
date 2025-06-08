@@ -21,7 +21,7 @@ call dein#add('Shougo/dein.vim')
 
 " Add or remove your plugins here:
 call dein#add('itchyny/lightline.vim') " VIMのコマンドラインをかっこよくする
-call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
+"call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
 call dein#add('scrooloose/nerdtree') " ファイラ
 call dein#add('jistr/vim-nerdtree-tabs') " nerdtreeをより使いやすく
 call dein#add('tomtom/tcomment_vim') "コメントON,OFFをCtrl+-で簡単に実行
@@ -38,7 +38,7 @@ call dein#add('tmhedberg/matchit') "対応する括弧に飛ぶ機能を強化
 " call dein#add('ujihisa/unite-colorscheme') " Unite -auto-preview colorscheme   colorscheme view bundle
 " call dein#add('thinca/vim-ref') " PHPのマニュアルをShift + kで出せるようにする　マニュアルは別途追加  http://loumo.jp/wp/archive/20120715001807/
 call dein#add('erikw/tmux-powerline') "tmux
-call dein#add('yegappan/grep') "grep
+"call dein#add('yegappan/grep') "grep
 
 " call dein#add('Shougo/unite.vim') " なんかいろいろできる
 "call dein#add('Shougo/vimshell') "vimからシェルを起動する
@@ -67,6 +67,18 @@ call dein#add('superused/vimcolor')
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
+call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) " ファイルビューワやらgrepやら、ctagsの検索やらが高速に
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+call dein#add('ervandew/supertab') "supertab／タブ補完
+" call dein#add('yuttie/comfortable-motion.vim') "スムーズなスクロールをする
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('previm/previm')
+call dein#add('tyru/open-browser.vim')
+" call dein#add('neomake/neomake')
+" call dein#add('benjie/neomake-local-eslint.vim')
+call dein#add('prettier/vim-prettier')
+call dein#add('dense-analysis/ale')
 " Required:
 call dein#end()
 
@@ -103,10 +115,10 @@ inoremap <ESC> <ESC><ESC>:set iminsert=0<CR>
 " set splitbelow "新しいウインドウを下に開く
 nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
 
-" mru.vim <C-h>で最近開いたファイルの履歴を見る
-nmap <silent> <C-h>      :MRU<CR>
-" MRUで履歴を保存するファイル数
-let MRU_Max_Entries = 10000
+"" mru.vim <C-h>で最近開いたファイルの履歴を見る
+"nmap <silent> <C-h>      :MRU<CR>
+"" MRUで履歴を保存するファイル数
+"let MRU_Max_Entries = 10000
 
 " neocomplete用設定
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -314,15 +326,17 @@ set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
 set expandtab     " タブ入力を複数の空白入力に置き換える
-set tabstop=4     " 画面上でタブ文字が占める幅
-set shiftwidth=4  " 自動インデントでずれる幅
-set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set tabstop=2     " 画面上でタブ文字が占める幅
+set shiftwidth=2  " 自動インデントでずれる幅
+set softtabstop=2 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent    " 改行時に前の行のインデントを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
 au BufNewFile,BufRead *.php set nowrap tabstop=4 shiftwidth=4
-au BufNewFile,BufRead *.html.twig set nowrap tabstop=4 shiftwidth=4
-au BufNewFile,BufRead *.ctp set nowrap tabstop=4 shiftwidth=4
+au BufNewFile,BufRead *.html.twig set nowrap tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.ctp set nowrap tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.js set nowrap tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.ts set nowrap tabstop=2 shiftwidth=2
 
 " 動作環境との統合関連の設定
 " OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
@@ -371,8 +385,8 @@ augroup filetypedetect
     au BufRead,BufNewFile *.twig set filetype=htmldjango
 augroup END
 
-nnoremap <silent><C-n> :tabn<CR>
-nnoremap <silent><C-p> :tabp<CR>
+nnoremap <C-p> gT
+nnoremap <C-n> gt
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q <C-u>cfirst<CR>
@@ -491,7 +505,7 @@ let g:lightline = {
       \ 'colorscheme': 'Tomorrow_Night_Blue',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ] ],
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ], [ 'ale' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'charcode', 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
@@ -511,6 +525,40 @@ let g:lightline = {
       \   'lineinfo': ' %3l:%-2v',
       \ }
       \ }
+
+
+""" ale {{{
+let g:ale_fixers = {
+      \   'typescript': ['eslint', 'prettier'],
+      \   'typescriptreact': ['eslint', 'prettier'],
+      \   'typescriptvue': ['eslint', 'prettier'],
+      \   'javascript': ['eslint', 'prettier'],
+      \   'javascriptreact': ['eslint', 'prettier'],
+      \   'css': ['prettier'],
+      \   'vue': ['eslint', 'prettier'],
+      \}
+let g:ale_linters = {
+      \   'typescript': ['eslint', 'typecheck'],
+      \   'typescriptreact': ['eslint', 'typecheck'],
+      \   'typescriptvue': ['eslint', 'typecheck'],
+      \   'javascript': ['eslint', 'typecheck'],
+      \   'javascriptreact': ['eslint', 'typecheck'],
+      \   'vue': ['eslint', 'typecheck'],
+      \}
+let g:ale_linters_explicit = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = 'P>'
+let g:ale_sign_warning = 'P-'
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
+
+nmap <silent> <C-w>j <Plug>(ale_next_wrap)
+nmap <silent> <C-w>k <Plug>(ale_previous_wrap)
+
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
+" }}}
 
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -618,6 +666,14 @@ function! MyCakephp()
   return exists('*cake#buffer') ? cake#buffer('type') : ''
 endfunction
 
+function! ALEStatus()
+  return ALEGetStatusLine()
+endfunction
+
+nmap <silent> <C-w>j <Plug>(ale_next_wrap)
+nmap <silent> <C-w>k <Plug>(ale_previous_wrap)
+let g:ale_echo_msg_format = '[%linter%] %s'
+
 if has('mac')
   set termencoding=utf-8
   set encoding=utf-8
@@ -625,9 +681,9 @@ if has('mac')
 endif
 "テスト
 
-" 外部Grepの設定
-set grepprg=grep\ -nH
-au QuickfixCmdPost grep copen "grep検索結果を自動で表示
+"" 外部Grepの設定
+"set grepprg=grep\ -nH
+"au QuickfixCmdPost grep copen "grep検索結果を自動で表示
 
 " vim-indent-guidesプラグイン: vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
@@ -859,28 +915,6 @@ let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
-" grep検索
-nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-
-" カーソル位置の単語をgrep検索
-nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-
-" grep検索結果の再呼出
-nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
-
-" unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-" grep.vim
-nnoremap <expr> gr ':Rgrep<CR>'
-let Grep_Skip_Dirs = '.svn .git'  "無視するディレクトリ
-let Grep_Default_Options = '-I'   "バイナルファイルがgrepしない
-let Grep_Skip_Files = '*.bak *~'  "バックアップファイルを無視する
-
 call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 " wsl2設定
@@ -890,3 +924,68 @@ augroup Yank
 augroup END
 " win32yank内の文字を一旦vimのレジスタに登録してからペイストする
 noremap <silent> p :call setreg('"',system('win32yank.exe -o'))<CR>""p
+
+" ファイルタイプ毎 & gitリポジトリ毎にtagsの読み込みpathを変える
+"
+function! ReadTags(type)
+    try
+        execute "set tags=".$HOME."/dotfiles/tags_files/".
+              \ system("cd " . expand('%:p:h') . "; basename `git rev-parse --show-toplevel` | tr -d '\n'").
+              \ "/" . a:type . "_tags"
+    catch
+        execute "set tags=./tags/" . a:type . "_tags;"
+    endtry
+endfunction
+
+augroup TagsAutoCmd
+    autocmd!
+    autocmd BufEnter * :call ReadTags(&filetype)
+augroup END
+
+set notagbsearch
+
+" [tag jump] カーソルの単語の定義先にジャンプ（複数候補はリスト表示）
+nnoremap tj :exe("tjump ".expand('<cword>'))<CR>
+" [tag back] tag stack を戻る -> tp(tag pop)よりもtbの方がしっくりきた
+nnoremap tb :pop<CR>
+" [tag next] tag stack を進む
+nnoremap tn :tag<CR>
+" [tag vertical] 縦にウィンドウを分割してジャンプ
+nnoremap tv :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+" [tag horizon] 横にウィンドウを分割してジャンプ
+nnoremap th :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+" [tag tab] 新しいタブでジャンプ
+nnoremap tt :tab sp<CR> :exe("tjump ".expand('<cword>'))<CR>
+" [tags list] tag list を表示
+nnoremap tl :ts<CR>
+
+" fzf settings
+let $FZF_DEFAULT_OPTS="--layout=reverse"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+
+let mapleader = "\<Space>"
+
+" fzf
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>g :GFiles<CR>
+nnoremap <silent> <leader>G :GFiles?<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>w :Windows<CR>
+nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>r :Rg<CR>
+
+""" markdown {{{
+   autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
+   autocmd BufRead,BufNewFile *.md  set filetype=markdown
+   " Need: kannokanno/previm
+   nnoremap <silent> <C-q> :PrevimOpen<CR> " Ctrl-pでプレビュー
+   " 自動で折りたたまないようにする
+   let g:vim_markdown_folding_disabled=1
+   let g:previm_enable_realtime = 1
+   let g:previm_open_cmd = '/mnt/c/Program\ Files/BraveSoftware/Brave-Browser/Application/brave.exe'
+   let g:previm_wsl_mode = 1
+ " }}}
+
+" autocmd! BufWritePost * Neomake
+" let g:neomake_javascript_enabled_makers = ['eslint']
