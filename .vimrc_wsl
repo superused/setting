@@ -21,7 +21,7 @@ call dein#add('Shougo/dein.vim')
 
 " Add or remove your plugins here:
 call dein#add('itchyny/lightline.vim') " VIMのコマンドラインをかっこよくする
-"call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
+call dein#add('vim-scripts/mru.vim') "最近開いたファイルの履歴を見る :MRU
 call dein#add('scrooloose/nerdtree') " ファイラ
 call dein#add('jistr/vim-nerdtree-tabs') " nerdtreeをより使いやすく
 call dein#add('tomtom/tcomment_vim') "コメントON,OFFをCtrl+-で簡単に実行
@@ -44,10 +44,11 @@ call dein#add('erikw/tmux-powerline') "tmux
 "call dein#add('Shougo/vimshell') "vimからシェルを起動する
 call dein#add('Shougo/vimproc') "vimshellの起動に必要
 call dein#add('Shougo/vimfiler') " ファイラ
-call dein#add('Shougo/neocomplete.vim') " 補完プラグイン
-call dein#add('Shougo/neosnippet') " 補完用ファイル
-call dein#add('Shougo/neosnippet-snippets') " 補完用ファイル群
+"call dein#add('Shougo/neocomplete.vim') " 補完プラグイン
+"call dein#add('Shougo/neosnippet') " 補完用ファイル
+"call dein#add('Shougo/neosnippet-snippets') " 補完用ファイル群
 "call dein#add('Quramy/tsuquyomi') " TypeScript補完
+call dein#add('neoclide/coc.nvim', {'branch': 'release'})
 
 "bundle color
 " call dein#add('sjl/badwolf')
@@ -115,10 +116,10 @@ inoremap <ESC> <ESC><ESC>:set iminsert=0<CR>
 " set splitbelow "新しいウインドウを下に開く
 nnoremap <silent> <C-s>      :new<CR><C-w>20-:VimShell<CR>
 
-"" mru.vim <C-h>で最近開いたファイルの履歴を見る
-"nmap <silent> <C-h>      :MRU<CR>
-"" MRUで履歴を保存するファイル数
-"let MRU_Max_Entries = 10000
+" mru.vim <C-h>で最近開いたファイルの履歴を見る
+nmap <silent> <C-h>      :MRU<CR>
+" MRUで履歴を保存するファイル数
+let MRU_Max_Entries = 10000
 
 " neocomplete用設定
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -989,3 +990,25 @@ nnoremap <silent> <leader>r :Rg<CR>
 
 " autocmd! BufWritePost * Neomake
 " let g:neomake_javascript_enabled_makers = ['eslint']
+
+
+" タブで補完候補を選択
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Enterで補完候補を確定
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+
+" 自動補完を有効化
+set updatetime=300
+autocmd CursorHold * silent call CocActionAsync('highlight')
